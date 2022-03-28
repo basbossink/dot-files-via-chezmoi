@@ -1,2 +1,5 @@
 [pull]
 	rebase = true
+[user]
+	name = Bas Bossink
+	email = bas.bossink@gmail.com
