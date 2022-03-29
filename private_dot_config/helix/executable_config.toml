@@ -1,0 +1,4 @@
+theme = "gruvbox"
+
+[lsp]
+display-messages = true
