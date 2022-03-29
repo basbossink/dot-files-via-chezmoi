@@ -3,3 +3,58 @@
 [user]
 	name = Bas Bossink
 	email = bas.bossink@gmail.com
+[core]
+	editor = kibi
+	pager = delta
+	trustctime = false
+	filemode = false
+	autocrlf = false
+[delta]
+	line-numbers = true
+	side-by-side = true
+	syntax-theme = zenburn
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
+[merge]
+	tool = meld
+[mergetool]
+	keepBackup = false
+[mergetool "meld"]
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+[alias]
+	br = branch
+	ci = commit
+	cl = clone
+	co = checkout
+	cp = cherry-pick
+	dc = diff --cached
+	dt = difftool
+	fff = flow feature finish
+	ffp = flow feature publish
+	ffs = flow feature start
+	fp = fetch --prune
+	frf = flow release finish
+	frp = flow release publish
+	frs = flow release start
+	last = log -1 HEAD
+	lg = log --graph --abbrev-commit --decorate --date=relative --all --oneline --no-color
+	mt = mergetool
+	pl = pull
+	ps = push
+	psf = push --force-with-lease
+	st = status
+	sup = submodule update
+	tg = tag --sort=-creatordate
+	unco = checkout
+	unstage = reset HEAD --
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[gui]
+	editor = neovide
