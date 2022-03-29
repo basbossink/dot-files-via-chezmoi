@@ -5,6 +5,8 @@ set -gx PATH $HOME/.cargo/bin $HOME/.local/bin $PATH
 
 alias apt='doas /usr/bin/apt'
 alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
+alias cm='chezmoi'
+alias g='git'
 
 zoxide init fish | source 
 starship init fish | source 
