@@ -277,7 +277,11 @@ globalkeys = mytable.join(
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen lock
-    awful.key({ altkey, "Control" }, "l", function () os.execute("i3lock") end,
+    awful.key({ altkey, "Control" }, "l", 
+        function () 
+            os.execute("i3lock") 
+            os.execute("keepassxc --lock") 
+        end,
               {description = "lock screen", group = "hotkeys"}),
     -- poweroff
     awful.key({ modkey, "Shift" }, "x", function () os.execute("doas /sbin/poweroff") end,
