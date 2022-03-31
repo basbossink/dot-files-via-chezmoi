@@ -74,7 +74,7 @@ vim.wo.signcolumn = 'yes'
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
-vim.o.guifont='GoMono Nerd Font:h12'
+vim.o.guifont='JetbrainsMono NF:h12'
 vim.cmd [[colorscheme gruvbox]]
 
 --Set statusbar
