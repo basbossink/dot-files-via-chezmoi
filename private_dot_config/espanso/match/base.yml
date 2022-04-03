@@ -1,0 +1,67 @@
+# espanso match file
+
+# For a complete introduction, visit the official docs at: https://espanso.org/docs/
+
+# You can use this file to define the base matches (aka snippets)
+# that will be available in every application when using espanso.
+
+# Matches are substitution rules: when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Print the output of a shell command
+  - trigger: ":shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo 'Hello from your shell'"
+
+  - trigger: ":thup"
+    replace: "👍"
+  - trigger: ":thax"
+    replace: "🙏"
+  - trigger: ":frown"
+    replace: "🤔"
+  - trigger: ":wink"
+    replace: "😉"
+  - trigger: ":smile"
+    replace: "🙂"
+  - trigger: ":scream"
+    replace: "😱"
+  - trigger: ":grts"
+    replace: |
+      Groeten,
+      Bas Bossink
+  - trigger: ":reds"
+    replace: |
+      Regards,
+      Bas Bossink
+  - trigger: ":bjb"
+    replace: "Bas Bossink"
+
+  # Dates
+  - trigger: ":emit"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%T"
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y%m%d"
+  - trigger: ":timedate"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y%m%dT%H%M"
+
+
+  # And much more! For more information, visit the docs: https://espanso.org/docs/
