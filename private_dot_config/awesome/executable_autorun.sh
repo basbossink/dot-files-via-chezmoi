@@ -20,3 +20,4 @@ EOF
 
 $HOME/.local/bin/dex --environment Awesome --autostart $HOME/.config/autostart/*.desktop
 xautolock -secure -notify 30 -notifier "notify-send 'About to lock the screen'" -locker "i3lock;keepassxc --lock" &
+espanso start --unmanaged 
