@@ -150,12 +150,12 @@ function skim_key_bindings
 
   bind \ct skim-file-widget
   bind \cr skim-history-widget
-  bind \ec skim-cd-widget
+  bind \cs skim-cd-widget
 
   if bind -M insert > /dev/null 2>&1
     bind -M insert \ct skim-file-widget
     bind -M insert \cr skim-history-widget
-    bind -M insert \ec skim-cd-widget
+    bind -M insert \cs skim-cd-widget
   end
 
   function __skim_parse_commandline -d 'Parse the current command line token and return split of existing filepath and rest of token'
