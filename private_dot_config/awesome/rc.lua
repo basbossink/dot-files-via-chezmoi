@@ -272,8 +272,17 @@ globalkeys = mytable.join(
     awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
               {description = "destroy all notifications", group = "hotkeys"}),
     -- Set Yubikey keyboard to us 
-    awful.key({ modkey, "Shift"}, "y", function () awful.spawn.with_shell("sh -c 'setxkbmap -device $(xinput | rg Yubico | cut -d= -f 2|cut -f 1) us'") end,
-        {description  = "set Yubikey keyboard layout", group = "hotkeys"}),
+    awful.key({ modkey, "Shift"}, "y",
+         function ()
+             awful.spawn.with_shell("sh -c 'setxkbmap -device $(xinput | rg Yubico | cut -d= -f 2|cut -f 1) us'")
+         end,
+        {description  = "Set Yubikey keyboard layout", group = "hotkeys"}),
+    awful.key({ modkey }, "e",
+         function ()
+             awful.spawn("splatmoji copy")
+         end,
+        {description  = "Select emoji and copy to clipboard", group = "hotkeys"}),
+
     -- X screen lock
     awful.key({ modkey, "Control" }, "l",
         function () 
