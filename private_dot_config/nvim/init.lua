@@ -36,6 +36,7 @@ require('packer').startup(function()
   use 'rafamadriz/friendly-snippets'
   use 'ziglang/zig.vim'
   use { 'ellisonleao/gruvbox.nvim', requires = { 'rktjmp/lush.nvim' } }
+  use 'editorconfig/editorconfig-vim'
 end)
 
 --Incremental live completion (note: this is now a default on master)
