@@ -8,7 +8,7 @@ set -gx GOPATH $HOME/proj/go
 set -gx GOBIN $HOME/.local/bin
 set -gx GO111MODULE "on"
 set -gx TD_HOME $HOME/ds/code/td
-
+set -gx PGHOST "/var/run/postgresql"
 alias apt='doas /usr/bin/apt'
 alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
 alias cm='chezmoi'
@@ -46,11 +46,6 @@ function update-repos
         update-repo $repo
     end
     popd 
-    pgrep -a watch | rg -wq '/usr/bin/fish -c update-repos'
-    if test $status -ne 0
-        nohup watch --interval 900 '/usr/bin/fish -c update-repos' > /dev/null 2>&1 & 
-        disown
-    end
 end
 
 alias urs update-repos
