@@ -1,7 +1,7 @@
 set -U fish_greeting
 set -U SXHKD_SHELL sh
 set -gx SKIM_DEFAULT_COMMAND "fd --type f"
-set -gx PATH $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
+set -gx PATH $HOME/.config/yarn/global/node_modules/.bin/ $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
 set -gx EDITOR hx
 set -gx VISUAL hx
 set -gx GOPATH $HOME/proj/go
