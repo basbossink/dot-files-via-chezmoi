@@ -9,6 +9,7 @@ set -gx GOBIN $HOME/.local/bin
 set -gx GO111MODULE "on"
 set -gx TD_HOME $HOME/ds/code/td
 set -gx PGHOST "/var/run/postgresql"
+
 alias apt='doas /usr/bin/apt'
 alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
 alias cm='chezmoi'
@@ -49,6 +50,12 @@ function update-repos
 end
 
 alias urs update-repos
+
+function show-overtime
+  ledger --daily reg | awk '{sum+=$5} END { printf "Average worked hours = %g\nNumber of Days = %d\nOvertime (min) = %f",sum/NR, NR, (sum-8*NR)*60 }'
+end
+
+alias over show-overtime
 
 function skim_key_bindings
 
