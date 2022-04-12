@@ -287,7 +287,6 @@ globalkeys = mytable.join(
     awful.key({ modkey, "Control" }, "l",
         function () 
             os.execute("i3lock") 
-            os.execute("keepassxc --lock") 
         end,
               {description = "lock screen", group = "hotkeys"}),
     -- poweroff
