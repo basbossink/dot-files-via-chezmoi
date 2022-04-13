@@ -53,10 +53,11 @@ alias urs update-repos
 
 function show-overtime
   ledger --daily reg | awk '{sum+=$5} END { \
-    printf "\
+  	overtime = sprintf("%d hours, %d minutes", int(sum-8*NR), int(((sum-8*NR)-int(sum-8*NR))*60)); \
+    printf("\
 Average number of hours worked per workday: = %g\n\
 Number of days worked: = %d\n\
-Overtime (min): = %d", sum/NR, NR, (sum-8*NR)*60 }' | column --table -s = 
+Overtime: = %s", sum/NR, NR, overtime) }' | column --table -s = 
 end
 
 alias over show-overtime
