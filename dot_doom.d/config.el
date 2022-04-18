@@ -77,9 +77,10 @@
 (setq timeclock-mode-line-display t
       timeclock-file (expand-file-name (getenv "TIMELOG")))
 (map! :leader
-      (:prefix ("k" . "Klok actions")
-       :desc "Clock in" "i" #'timeclock-in
-       :desc "Clock out" "o" #'timeclock-out))
+      (:prefix ("k" . "Clock actions")
+       :desc "clock In" "i" #'timeclock-in
+       :desc "clock Out" "o" #'timeclock-out
+       :desc "Visit timelog" "v" #'timeclock-visit-timelog))
 (after! magit
   (setq
    magit-repository-directories (list (cons (expand-file-name "~/ds/code") 2))
