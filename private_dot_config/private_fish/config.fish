@@ -9,6 +9,7 @@ set -gx GOBIN $HOME/.local/bin
 set -gx GO111MODULE "on"
 set -gx TD_HOME $HOME/ds/code/td
 set -gx PGHOST "/var/run/postgresql"
+set -gx TIMELOG $HOME/ds/.local/data/.timelog 
 
 alias apt='doas /usr/bin/apt'
 alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
@@ -20,7 +21,7 @@ alias edit='hx'
 alias e='hx'
 alias neovim='nvim'
 alias gvim='neovide'
-alias ledger='ledger -f $HOME/ds/.local/data/.timelog'
+alias ledger='ledger -f $TIMELOG'
 
 zoxide init fish | source 
 starship init fish | source 
@@ -52,12 +53,9 @@ end
 alias urs update-repos
 
 function show-overtime
-  ledger --daily reg | awk '{sum+=$5} END { \
-  	overtime = sprintf("%d hours, %d minutes", int(sum-8*NR), int(((sum-8*NR)-int(sum-8*NR))*60)); \
-    printf("\
-Average number of hours worked per workday: = %g\n\
-Number of days worked: = %d\n\
-Overtime: = %s", sum/NR, NR, overtime) }' | column --table -s = 
+  set -l today_start (tail -n 20 $TIMELOG | rg (date +%Y/%m/%d) | rg '^i ' | head -1 | cut -d' ' -f2,3 | tr '/:' ' ')
+  set -l worked_today (ledger bal --period 'today' | awk '{ print $1 }')
+  ledger --daily reg | TODAY_START=$today_start WORKED_TODAY=$worked_today over-time.awk | column --table -s = 
 end
 
 alias over show-overtime

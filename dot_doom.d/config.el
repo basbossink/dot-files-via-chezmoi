@@ -75,7 +75,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 (setq timeclock-mode-line-display t
-      timeclock-file (expand-file-name "~/ds/.local/data/.timelog"))
+      timeclock-file (expand-file-name (getenv "TIMELOG")))
 (map! :leader
       (:prefix ("k" . "Klok actions")
        :desc "Clock in" "i" #'timeclock-in
