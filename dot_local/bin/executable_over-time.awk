@@ -41,6 +41,6 @@ END {
 	printf("Worked today: = %s\n", to_hours_minutes(worked_today))
 	printf("Still to work (8hrs): = %s\n", to_hours_minutes(to_work_8h))
 	printf("Still to work: = %s\n", to_hours_minutes(to_work))
-	printf("Time to leave (8hrs): = %s\n", strftime("%T", mktime(today_start) + as_seconds(to_work_8h)))
-	printf("Time to leave: = %s\n", strftime("%T", mktime(today_start) + as_seconds(to_work)))
+	printf("Time to leave (8hrs): = %s\n", strftime("%T", systime() + as_seconds(to_work_8h)))
+	printf("Time to leave: = %s\n", strftime("%T", systime() + as_seconds(to_work)))
 }
