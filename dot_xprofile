@@ -1,0 +1,6 @@
+#!/bin/sh
+nm-applet &
+setxkbmap us dvorak ctrl:nocaps
+xrdb -merge ~/.Xresources
+xsetroot -cursor_name left_ptr
+xsetroot -gray
