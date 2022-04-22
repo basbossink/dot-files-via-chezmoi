@@ -37,7 +37,8 @@ END {
 	to_work = to_work_8h - overtime
     printf("Average number of hours worked per workday: = %g\n", $6/NR)
     printf("Number of days worked: = %d\n", NR)
-    printf("Cummulative overtime per yersterday: = %s\n", to_hours_minutes(overtime))
+    printf("Cummulative overtime per yesterday: = %s\n", to_hours_minutes(overtime))
+    printf("First punch in today: = %s\n", strftime("%T", mktime(today_start)))
 	printf("Worked today: = %s\n", to_hours_minutes(worked_today))
 	printf("Still to work (8hrs): = %s\n", to_hours_minutes(to_work_8h))
 	printf("Still to work: = %s\n", to_hours_minutes(to_work))
