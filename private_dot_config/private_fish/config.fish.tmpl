@@ -9,7 +9,7 @@ set -gx GOBIN $HOME/.local/bin
 set -gx GO111MODULE "on"
 set -gx TD_HOME $HOME/ds/code/td
 set -gx PGHOST "/var/run/postgresql"
-set -gx TIMELOG $HOME/ds/.local/data/.timelog 
+set -gx TIMELOG {{ .timelog }}
 
 alias apt='doas /usr/bin/apt'
 alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
