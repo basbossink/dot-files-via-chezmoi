@@ -3,7 +3,7 @@
 <br />
 <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" /><br>
 <br>
-My personal dot files managed using chezmoi
+  My personal dot files managed using <a href="https://www.chezmoi.io/">chezmoi</a>.
 </div>
 
 ***
