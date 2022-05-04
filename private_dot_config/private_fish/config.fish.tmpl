@@ -1,13 +1,13 @@
 set -U fish_greeting
 set -U SXHKD_SHELL sh
 set -gx SKIM_DEFAULT_COMMAND "fd --type f"
-set -gx PATH $HOME/.config/yarn/global/node_modules/.bin/ $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
+set -gx PATH /usr/lib/llvm-14/bin $HOME/.config/yarn/global/node_modules/.bin/ $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
 set -gx EDITOR hx
 set -gx VISUAL hx
 set -gx GOPATH $HOME/proj/go
 set -gx GOBIN $HOME/.local/bin
 set -gx GO111MODULE "on"
-set -gx TD_HOME $HOME/ds/code/td
+set -gx TD_HOME $HOME/ds/code
 set -gx PGHOST "/var/run/postgresql"
 set -gx TIMELOG {{ .timelog }}
 
@@ -22,6 +22,7 @@ alias e='hx'
 alias neovim='nvim'
 alias gvim='neovide'
 alias ledger='ledger -f $TIMELOG'
+alias j='just'
 
 zoxide init fish | source 
 starship init fish | source 
@@ -32,21 +33,13 @@ if test -z (pgrep ssh-agent | string collect)
     set -Ux SSH_AGENT_PID $SSH_AGENT_PID
 end
 
-function update-repo 
-    pushd $argv[1]
-    git fetch --prune --verbose
-    popd
-end
-
 function update-repos
     ssh-add -l | rg -wq 'basbossink-ds'
     if test $status -ne 0 
         ssh-add $HOME/.ssh/id_basbossink-ds
     end
     pushd $TD_HOME
-    for repo in (fd --max-depth 1 --type d);
-        update-repo $repo
-    end
+    fd -uu --max-depth 3 --type d '\.git$' -x sh -c "cd {//}; git fetch --prune --verbose"
     popd 
 end
 
@@ -59,6 +52,7 @@ function show-overtime
 end
 
 alias over show-overtime
+alias tls tldsum
 
 function skim_key_bindings
 
