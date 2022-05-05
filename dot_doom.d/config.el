@@ -97,3 +97,6 @@
       (:help-echo "Local changes not in upstream")))
     ("Path" 99 magit-repolist-column-path nil)))
   (magit-list-repositories))
+
+;; Prefer symbol motions
+(defalias 'forward-evil-word 'forward-evil-symbol)
