@@ -100,3 +100,36 @@
 
 ;; Prefer symbol motions
 (defalias 'forward-evil-word 'forward-evil-symbol)
+
+;; Mail setup
+(after! mu4e
+  (set-email-account! "work"
+                      '((mu4e-sent-folder       . "/work/[Gmail]/Verzonden berichten")
+                        (mu4e-drafts-folder     . "/work/[Gmail]/Concepten")
+                        (mu4e-trash-folder      . "/work/[Gmail]/Prullenbak")
+                        (mu4e-refile-folder     . "/work/[Gmail]/Alle e-mail")
+                        (smtpmail-smtp-user     . "basbossink@dreamsolution.nl"))
+                      t)
+  (setq +mu4e-gmail-accounts '(("basbossink@dreamsolution.nl" . "/work")))
+  (setq sendmail-program "/usr/bin/msmtp"
+        send-mail-function #'smtpmail-send-it
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        message-send-mail-function #'message-send-mail-with-sendmail)
+
+  (setq mu4e-compose-signature (with-temp-buffer
+                                 (insert-file-contents "~/.signature")
+                                 (buffer-string)))
+  (setq message-signature-file "~/.signature")
+
+  (setq mu4e-headers-fields
+        '( (:date          .  20)
+           (:flags         .   6)
+           (:from          .  30)
+           (:mailing-list  .  10)
+           (:subject       .  nil)))
+  (setq mu4e-headers-date-format "%F %T")
+  (setq mu4e-index-cleanup nil
+        ;; because gmail uses labels as folders we can use lazy check since
+        ;; messages don't really "move"
+        mu4e-index-lazy-check t))
