@@ -26,6 +26,7 @@ alias j='just'
 
 zoxide init fish | source 
 starship init fish | source 
+gpgconf --launch gpg-agent
 
 if test -z (pgrep ssh-agent | string collect)
     eval (ssh-agent -c)
