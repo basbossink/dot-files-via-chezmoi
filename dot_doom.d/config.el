@@ -76,11 +76,17 @@
 ;; they are implemented.
 (setq timeclock-mode-line-display t
       timeclock-file (expand-file-name (getenv "TIMELOG")))
+
+(defun my/timeclock-visit-timelog ()
+  (interactive)
+  (switch-to-buffer (find-file-noselect timeclock-file nil nil nil)))
+
 (map! :leader
       (:prefix ("k" . "Clock actions")
        :desc "clock In" "i" #'timeclock-in
        :desc "clock Out" "o" #'timeclock-out
-       :desc "Visit timelog" "v" #'timeclock-visit-timelog))
+       :desc "Visit timelog" "v" #'my/timeclock-visit-timelog))
+
 (after! magit
   (setq
    magit-repository-directories (list (cons (expand-file-name "~/ds/code") 2))
@@ -111,11 +117,14 @@
                         (smtpmail-smtp-user     . "basbossink@dreamsolution.nl"))
                       t)
   (setq +mu4e-gmail-accounts '(("basbossink@dreamsolution.nl" . "/work")))
+
   (setq sendmail-program "/usr/bin/msmtp"
         send-mail-function #'smtpmail-send-it
         message-sendmail-f-is-evil t
         message-sendmail-extra-arguments '("--read-envelope-from")
         message-send-mail-function #'message-send-mail-with-sendmail)
+
+  (setq mu4e-compose-reply-to-address "basbossink@dreamsolution.nl")
 
   (setq mu4e-compose-signature (with-temp-buffer
                                  (insert-file-contents "~/.signature")
@@ -129,6 +138,7 @@
            (:mailing-list  .  10)
            (:subject       .  nil)))
   (setq mu4e-headers-date-format "%F %T")
+
   (setq mu4e-index-cleanup nil
         ;; because gmail uses labels as folders we can use lazy check since
         ;; messages don't really "move"
