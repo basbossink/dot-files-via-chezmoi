@@ -9,7 +9,9 @@ set -gx GOBIN $HOME/.local/bin
 set -gx GO111MODULE "on"
 set -gx TD_HOME $HOME/ds/code
 set -gx PGHOST "/var/run/postgresql"
+set -gx DS_LOCAL_DATA $HOME/ds/.local/data
 set -gx TIMELOG {{ .timelog }}
+set -gx TRAVEL_EXP_DIR $DS_LOCAL_DATA/travel/
 
 alias apt='doas /usr/bin/apt'
 alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
@@ -33,6 +35,14 @@ if test -z (pgrep ssh-agent | string collect)
     set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
     set -Ux SSH_AGENT_PID $SSH_AGENT_PID
 end
+
+function add-today-to-travel-exp
+  set -l dir $TRAVEL_EXP_DIR(date +%Y/%m)
+  mkdir -p $dir
+  date -I >> $dir/dates.txt
+end
+
+alias ato add-today-to-travel-exp
 
 function update-repos
     ssh-add -l | rg -wq 'basbossink-ds'
