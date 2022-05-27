@@ -143,3 +143,21 @@
         ;; because gmail uses labels as folders we can use lazy check since
         ;; messages don't really "move"
         mu4e-index-lazy-check t))
+
+(use-package! super-save
+  :config
+  (super-save-mode +1)
+  (setq super-save-auto-save-when-idle t))
+
+(setq global-auto-revert-mode t
+      auto-revert-verbose nil
+      dired-auto-revert-buffer t)
+
+(add-hook
+ 'lsp-after-apply-edits-hook
+ (lambda (operation)
+   (when (eq operation 'rename)
+     (projectile-save-project-buffers))))
+
+(after! (:and treemacs ace-window)
+  (setq aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers)))
