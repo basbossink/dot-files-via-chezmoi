@@ -130,6 +130,7 @@
                                  (insert-file-contents "~/.signature")
                                  (buffer-string)))
   (setq message-signature-file "~/.signature")
+  (setq mu4e-attachment-dir "~/Downloads")
 
   (setq mu4e-headers-fields
         '( (:date          .  20)
