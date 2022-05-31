@@ -268,8 +268,7 @@ theme.mpd = lain.widget.mpd({
 
 function theme.at_screen_connect(s)
     -- Quake application
-    s.quake = lain.util.quake()
---    s.quake = lain.util.quake({ app = "xterm", followtag = true, argname = "--name %s", visible = true, screen = s, height = 0.6 })
+    s.quake = lain.util.quake({ app = awful.util.terminal, followtag = true, argname ="--class %s", screen = s, height = 0.35 })
 
     -- Set background to gruvbox grey
     gears.wallpaper.set("#928374")
