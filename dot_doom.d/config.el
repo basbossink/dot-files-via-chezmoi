@@ -165,4 +165,10 @@
 
 (after!
   lsp-mode
-  (setq lsp-lens-enable nil))
+  (setq lsp-lens-enable nil
+        lsp-headerline-breadcrumb-enable t))
+
+(map! (:map rustic-mode-map
+        :localleader
+        :desc "Jump to begin of function" "f" #'rustic-beginning-of-defun
+        :desc "Jump to end of function" "e" #'rustic-end-of-defun))
