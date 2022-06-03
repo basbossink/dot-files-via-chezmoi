@@ -172,3 +172,7 @@
         :localleader
         :desc "Jump to begin of function" "f" #'rustic-beginning-of-defun
         :desc "Jump to end of function" "e" #'rustic-end-of-defun))
+
+(map!
+ :desc "Yank selection from kill-ring"
+ "C-c p" #'consult-yank-from-kill-ring)
