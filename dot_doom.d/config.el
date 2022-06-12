@@ -42,6 +42,21 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+(after! org
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-log-into-drawer t
+        org-todo-keywords '((sequence "TODO(t!)" "DEVELOPING(d!)" "IN REVIEW(r!)" "W.F. REWORK(w!)" "REWORKING(o!)" "IN RE-REVIEW(n!)" "MERGED(m!)" "TESTING(t!)" "|" "DONE(e!)" "CANCELED(c@)"))
+        org-todo-keywords-for-agenda '((sequence "TODO(t!)" "|" "DONE(d!)" "CANCELED(c@)")))
+
+  (defun bb/add-custom-id (id)
+    (interactive "sID: ")
+    (org-set-property "CUSTOM_ID" id))
+
+  (map! :leader
+        (:prefix ("i" . "insert")
+         :desc "custom Id" "i" #'bb/add-custom-id)))
+
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -74,18 +89,19 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(setq timeclock-mode-line-display t
-      timeclock-file (expand-file-name (getenv "TIMELOG")))
+(after! timeclock
+  (setq timeclock-mode-line-display t
+        timeclock-file (expand-file-name (getenv "TIMELOG")))
 
-(defun my/timeclock-visit-timelog ()
-  (interactive)
-  (switch-to-buffer (find-file-noselect timeclock-file nil nil nil)))
+  (defun my/timeclock-visit-timelog ()
+    (interactive)
+    (switch-to-buffer (find-file-noselect timeclock-file nil nil nil)))
 
-(map! :leader
-      (:prefix ("k" . "Clock actions")
-       :desc "clock In" "i" #'timeclock-in
-       :desc "clock Out" "o" #'timeclock-out
-       :desc "Visit timelog" "v" #'my/timeclock-visit-timelog))
+  (map! :leader
+        (:prefix ("k" . "Clock actions")
+         :desc "clock In" "i" #'timeclock-in
+         :desc "clock Out" "o" #'timeclock-out
+         :desc "Visit timelog" "v" #'my/timeclock-visit-timelog)))
 
 (after! magit
   (setq
@@ -104,8 +120,9 @@
     ("Path" 99 magit-repolist-column-path nil)))
   (magit-list-repositories))
 
-;; Prefer symbol motions
-(defalias 'forward-evil-word 'forward-evil-symbol)
+(after! evil
+  ;; Prefer symbol motions
+  (defalias 'forward-evil-word 'forward-evil-symbol))
 
 ;; Mail setup
 (after! mu4e
@@ -145,34 +162,45 @@
         ;; messages don't really "move"
         mu4e-index-lazy-check t))
 
-(use-package! super-save
-  :config
-  (super-save-mode +1)
-  (setq super-save-auto-save-when-idle t))
-
-(setq global-auto-revert-mode t
-      auto-revert-verbose nil
-      dired-auto-revert-buffer t)
-
-(add-hook
- 'lsp-after-apply-edits-hook
- (lambda (operation)
-   (when (eq operation 'rename)
-     (projectile-save-project-buffers))))
-
 (after! (:and treemacs ace-window)
   (setq aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers)))
 
 (after!
   lsp-mode
+  (add-hook
+   'lsp-after-apply-edits-hook
+   (lambda (operation)
+     (when (eq operation 'rename)
+       (projectile-save-project-buffers))))
   (setq lsp-lens-enable nil
         lsp-headerline-breadcrumb-enable t))
 
-(map! (:map rustic-mode-map
-        :localleader
-        :desc "Jump to begin of function" "f" #'rustic-beginning-of-defun
-        :desc "Jump to end of function" "e" #'rustic-end-of-defun))
+(after! rustic
+  (map! (:map rustic-mode-map
+         :localleader
+         :desc "Jump to begin of function" "f" #'rustic-beginning-of-defun
+         :desc "Jump to end of function" "e" #'rustic-end-of-defun)))
 
-(map!
- :desc "Yank selection from kill-ring"
- "C-c p" #'consult-yank-from-kill-ring)
+(after! consult
+  (map!
+   :desc "Yank selection from kill-ring"
+   "C-c p" #'consult-yank-from-kill-ring))
+
+(after! markdown-mode
+  (add-hook 'markdown-mode-hook #'auto-fill-mode))
+
+(use-package! org-kanban)
+
+(use-package! super-save
+  :config
+  (super-save-mode +1)
+  (setq super-save-auto-save-when-idle t))
+
+(setq
+ global-auto-revert-mode t
+ auto-revert-verbose nil
+ dired-auto-revert-buffer t
+ explicit-shell-file-name "/usr/bin/sh"
+ shell-file-name "/usr/bin/sh"
+ browse-url-browser-function 'browse-url-firefox
+ browse-url-generic-program "firefox")
