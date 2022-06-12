@@ -22,3 +22,4 @@ $HOME/.local/bin/dex --environment Awesome --autostart $HOME/.config/autostart/*
 xautolock -secure -notify 30 -notifier "notify-send 'About to lock the screen'" -locker "i3lock" &
 espanso start --unmanaged
 flameshot
+qlipper & > /dev/null 2>&1
