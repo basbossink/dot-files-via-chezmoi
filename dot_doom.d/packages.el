@@ -8,13 +8,13 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
-(package! org-pomodoro)
-(package! just-mode)
-(package! super-save)
-(package! mermaid-mode)
 (package! bazel-mode
   :recipe (:host github :repo "bazelbuild/emacs-bazel-mode" :files ("bazel.el")))
+(package! just-mode)
+(package! mermaid-mode)
 (package! org-kanban)
+(package! org-pomodoro)
+(package! super-save)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
