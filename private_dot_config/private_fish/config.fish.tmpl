@@ -2,6 +2,7 @@ set -U fish_greeting
 set -U SXHKD_SHELL sh
 set -gx SKIM_DEFAULT_COMMAND "fd --type f"
 set -gx PATH /usr/lib/llvm-14/bin $HOME/.config/yarn/global/node_modules/.bin/ $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $PATH
+set -gx BROWSER firefox
 set -gx EDITOR hx
 set -gx VISUAL hx
 set -gx GOPATH $HOME/proj/go
@@ -26,6 +27,7 @@ alias gvim='neovide'
 alias ledger='ledger -f $TIMELOG'
 alias j='just'
 
+umask 027
 zoxide init fish | source 
 starship init fish | source 
 gpgconf --launch gpg-agent
