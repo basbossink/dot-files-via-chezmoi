@@ -282,6 +282,11 @@ globalkeys = mytable.join(
              awful.spawn("splatmoji copy")
          end,
         {description  = "Select emoji and copy to clipboard", group = "hotkeys"}),
+    awful.key({ modkey }, "s",
+         function ()
+             awful.spawn("flameshot gui")
+         end,
+        {description  = "Take screenshot", group = "hotkeys"}),
 
     -- X screen lock
     awful.key({ modkey, "Control" }, "l",
