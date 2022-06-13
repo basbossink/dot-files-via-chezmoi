@@ -48,3 +48,15 @@ zoxide init nushell --hook prompt | save ($env.NU_LIB_DIRS.0 | path join 'zoxide
 
 starship init nu | save ($env.NU_LIB_DIRS.0 | path join 'starship-init.nu')
 
+# Personal environment settings
+
+let home_path_additions = [ /.config/yarn/global/node_modules/.bin/ 
+    /.emacs.d/bin 
+    /.cargo/bin 
+    /.local/bin 
+]
+let full_home_path_additions = ($home_path_additions | each { |it| $"($env.HOME)($it)"})
+let-env PATH = ($env.PATH | append $full_home_path_additions )
+let-env PATH = ($env.PATH | append '/usr/lib/llvm-14/bin')
+let-env PATH = ($env.PATH | uniq)
+
