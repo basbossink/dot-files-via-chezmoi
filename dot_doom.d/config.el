@@ -89,19 +89,18 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(after! timeclock
-  (setq timeclock-mode-line-display t
-        timeclock-file (expand-file-name (getenv "TIMELOG")))
+(setq timeclock-mode-line-display t
+      timeclock-file (expand-file-name (getenv "TIMELOG")))
 
-  (defun my/timeclock-visit-timelog ()
-    (interactive)
-    (switch-to-buffer (find-file-noselect timeclock-file nil nil nil)))
+(defun my/timeclock-visit-timelog ()
+  (interactive)
+  (switch-to-buffer (find-file-noselect timeclock-file nil nil nil)))
 
-  (map! :leader
-        (:prefix ("k" . "Clock actions")
-         :desc "clock In" "i" #'timeclock-in
-         :desc "clock Out" "o" #'timeclock-out
-         :desc "Visit timelog" "v" #'my/timeclock-visit-timelog)))
+(map! :leader
+      (:prefix ("k" . "Clock actions")
+       :desc "clock In" "i" #'timeclock-in
+       :desc "clock Out" "o" #'timeclock-out
+       :desc "Visit timelog" "v" #'my/timeclock-visit-timelog))
 
 (after! magit
   (setq
