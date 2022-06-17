@@ -193,7 +193,9 @@
 (use-package! super-save
   :config
   (super-save-mode +1)
-  (setq super-save-auto-save-when-idle t))
+  (setq
+   super-save-auto-save-when-idle t
+   super-save-idle-duration 20))
 
 (setq
  global-auto-revert-mode t
