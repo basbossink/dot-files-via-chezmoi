@@ -185,8 +185,9 @@
    :desc "Yank selection from kill-ring"
    "C-c p" #'consult-yank-from-kill-ring))
 
-(after! markdown-mode
-  (add-hook 'markdown-mode-hook #'auto-fill-mode))
+(after!
+  (:or gfm-mode markdown-mode)
+  (add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill))
 
 (use-package! org-kanban)
 
