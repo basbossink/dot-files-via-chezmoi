@@ -14,6 +14,7 @@
 (package! mermaid-mode)
 (package! org-kanban)
 (package! org-pomodoro)
+(package! string-inflection)
 (package! super-save)
 
 ;; To install a package directly from a remote git repo, you must specify a
