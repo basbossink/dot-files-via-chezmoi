@@ -226,6 +226,8 @@
       (setq evil-repeat-info '([?g ?~])))
     (define-key evil-normal-state-map (kbd "g~") 'evil-operator-string-inflection)))
 
+(use-package! ob-http)
+
 (setq
  global-auto-revert-mode t
  auto-revert-verbose nil

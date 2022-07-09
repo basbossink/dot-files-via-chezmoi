@@ -12,6 +12,7 @@
   :recipe (:host github :repo "bazelbuild/emacs-bazel-mode" :files ("bazel.el")))
 (package! just-mode)
 (package! mermaid-mode)
+(package! ob-http)
 (package! org-kanban)
 (package! org-pomodoro)
 (package! string-inflection)
