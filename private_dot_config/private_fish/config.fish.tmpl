@@ -14,19 +14,20 @@ set -gx DS_LOCAL_DATA $HOME/ds/.local/data
 set -gx TIMELOG {{ .timelog }}
 set -gx TRAVEL_EXP_DIR $DS_LOCAL_DATA/travel/
 
+alias .j='just --justfile ~/.user.justfile --working-directory .'
 alias apt='doas /usr/bin/apt'
-alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
+alias c='cargo'
 alias cm='chezmoi'
+alias e='hx'
+alias edit='hx'
 alias g='git'
+alias gvim='neovide'
+alias j='just'
+alias ledger='ledger -f $TIMELOG'
+alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
+alias neovim='nvim'
 alias vi='nvim'
 alias vim='nvim'
-alias edit='hx'
-alias e='hx'
-alias neovim='nvim'
-alias gvim='neovide'
-alias ledger='ledger -f $TIMELOG'
-alias j='just'
-alias .j='just --justfile ~/.user.justfile --working-directory .'
 
 umask 027
 zoxide init fish | source 

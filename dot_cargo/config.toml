@@ -1,0 +1,15 @@
+[target.x86_64-unknown-linux-gnu]
+linker = "/usr/lib/llvm-14/bin/clang"
+rustflags = ["-C", "link-arg=-fuse-ld=/usr/local/bin/mold"]
+
+[build]
+incremental = true  
+target-dir = "/home/bas/.cache/cargo/target"
+rustc-wrapper = "/home/bas/.cargo/bin/sccache"
+
+[alias]
+b = "build"
+c = "check"
+t = "test"
+r = "run"
+rr = "run --release"
