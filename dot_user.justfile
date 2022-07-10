@@ -7,7 +7,7 @@ serve-schemaspy:
 	cd ~/tmp && microserver --port 8000 > /dev/null 2>&1
 
 watch:
-	watchexec --debounce 3000 -c -e rs -- cargo nextest run -j 1
+	watchexec --on-busy-update restart --debounce 3000 -c -e rs -- cargo nextest run -j 1
 
 update-fish-config:
 	meld private_dot_config/private_fish/config.fish.tmpl ~/.config/fish/config.fish
