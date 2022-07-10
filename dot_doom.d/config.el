@@ -117,6 +117,9 @@
      ((:right-align t)
       (:help-echo "Local changes not in upstream")))
     ("Path" 99 magit-repolist-column-path nil)))
+  (magit-add-section-hook
+   'magit-status-sections-hook
+   'magit-insert-branch-description nil t)
   (magit-list-repositories))
 
 (after! evil
@@ -229,10 +232,12 @@
 (use-package! ob-http)
 
 (setq
- global-auto-revert-mode t
  auto-revert-verbose nil
+ browse-url-browser-function 'browse-url-firefox
+ browse-url-generic-program "firefox"
  dired-auto-revert-buffer t
  explicit-shell-file-name "/usr/bin/sh"
+ global-auto-revert-mode t
+ sentence-end-double-space nil
  shell-file-name "/usr/bin/sh"
- browse-url-browser-function 'browse-url-firefox
- browse-url-generic-program "firefox")
+)
