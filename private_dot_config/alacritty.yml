@@ -41,3 +41,9 @@ font:
 window:
     fullscreen: true
     decoration: false
+shell:
+  program: /usr/bin/fish
+  args:
+    - --login
+    - --command
+    - "tmux -u new-session -A -s main"
