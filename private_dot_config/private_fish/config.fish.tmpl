@@ -69,6 +69,22 @@ end
 alias over show-overtime
 alias tls tlsum
 
+function jump-to-repo-root
+  pushd (git rev-parse --show-toplevel)
+  commandline -f repaint
+end
+
+alias jrr jump-to-repo-root
+bind \ch 'jump-to-repo-root'
+
+function run-ci
+  jump-to-repo-root
+  TD_LOG_LEVEL=warn ./runtest.sh
+  popd
+end
+
+bind \ci 'run-ci'
+
 function skim_key_bindings
 
   # Store current token in $dir as root for the 'find' command
