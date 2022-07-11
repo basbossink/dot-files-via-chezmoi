@@ -29,6 +29,7 @@
     cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
 [alias]
 	br = branch
+	bre = branch --edit-description
 	ci = commit
 	cl = clone
 	co = checkout
@@ -49,6 +50,7 @@
 	pl = pull
 	ps = push
 	psf = push --force-with-lease
+	root = rev-parse --show-toplevel
 	st = status
 	sup = submodule update
 	tg = tag --sort=-creatordate
