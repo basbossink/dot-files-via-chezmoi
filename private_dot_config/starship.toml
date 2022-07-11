@@ -1,0 +1,10 @@
+format = "${custom.branchdesc}$all"
+
+[directory]
+truncation_length = 8
+
+[custom.branchdesc]
+shell = ["/usr/bin/sh"]
+command = "git config branch.$(git branch --show-current).description | tr -d ' \n'"
+symbol = "💬"
+when = "git rev-parse --show-toplevel"
