@@ -15,4 +15,4 @@ update-fish-config:
 
 start-ext-api:
 	~/.local/bin/copy-ext-api-creds-to-clipboard.sh
-	cargo run ext-api run http://127.0.0.1/8002
+	cargo run ext-api run http://127.0.0.1:8002
