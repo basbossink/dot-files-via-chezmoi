@@ -49,6 +49,23 @@
         org-todo-keywords '((sequence "DEVELOPING(d!)" "IN REVIEW(r!)" "W.F. REWORK(w!)" "REWORKING(o!)" "IN RE-REVIEW(n!)" "|" "MERGED(m!)" "CANCELED(c@)"))
         org-todo-keywords-for-agenda '((sequence "TODO(t!)" "|" "DONE(d!)" "CANCELED(c@)")))
 
+  (after! org-capture
+    (setq bb/http-test-directory (expand-file-name "tests" org-directory))
+    (setq bb/http-test-template (expand-file-name "template.org" bb/http-test-directory))
+
+    (defun bb/test-file-name ()
+      (expand-file-name
+       (format-time-string "%Y%m%dT%H%M%S.org")
+       bb/http-test-directory))
+
+    (add-to-list
+     'org-capture-templates
+     `("i" "HTTP endpoint test session"
+       plain
+       (file (lambda () (bb/test-file-name)))
+       (file ,bb/http-test-template)
+       :jump-to-captured t)))
+
   (defun bb/add-custom-id (id)
     (interactive "sID: ")
     (org-set-property "CUSTOM_ID" id))
