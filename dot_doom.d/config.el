@@ -258,3 +258,19 @@
  sentence-end-double-space nil
  shell-file-name "/usr/bin/sh"
 )
+
+(defun bb/set-exec-path-from-shell-path ()
+  (let* ((sh-path
+          (substring (shell-command-to-string ". $HOME/.shinit && echo $PATH") 0 -1))
+         (path-dirs (split-string sh-path ":"))
+         (new-exec-path (seq-remove #'string-empty-p
+                                    (seq-uniq
+                                     (append
+                                      (seq-filter #'file-directory-p path-dirs)
+                                      exec-path)))))
+    (message "setting exec-path to %S" new-exec-path)
+    (setq exec-path new-exec-path)
+    (setenv "PATH" (string-join new-exec-path ":"))))
+
+(add-hook 'after-init-hook
+           #'bb/set-exec-path-from-shell-path)
