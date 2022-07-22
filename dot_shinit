@@ -14,8 +14,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # erlang
-if [ -d "$HOME/.local/bin/erl/25.0.2" ] ; then
-    . "$HOME/.local/bin/erl/25.0.2/activate"
+if [ -d "$HOME/.local/bin/erl/25.0.3" ] ; then
+    . "$HOME/.local/bin/erl/25.0.3/activate"
 fi
 
 if [ -d "$HOME/.cache/rebar3/bin" ] ; then
