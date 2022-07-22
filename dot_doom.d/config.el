@@ -42,6 +42,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+
 (after! org
   (setq org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t
@@ -73,7 +74,6 @@
   (map! :leader
         (:prefix ("i" . "insert")
          :desc "custom Id" "i" #'bb/add-custom-id)))
-
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -144,6 +144,7 @@
   (defalias 'forward-evil-word 'forward-evil-symbol))
 
 ;; Mail setup
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (after! mu4e
   (set-email-account! "work"
                       '((mu4e-sent-folder       . "/work/[Gmail]/Verzonden berichten")
