@@ -1,5 +1,6 @@
 #!/bin/sh
-setxkbmap us dvorak ctrl:nocaps
+
+kanata --cfg $HOME/.config/kanata/simple.kbd &
 xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr
 xsetroot -gray
