@@ -11,6 +11,9 @@
 (package! bazel-mode
   :recipe (:host github :repo "bazelbuild/emacs-bazel-mode" :files ("bazel.el")))
 (package! just-mode)
+(package! kbd-mode
+  :recipe (:host github
+           :repo "kmonad/kbd-mode"))
 (package! mermaid-mode)
 (package! ob-http)
 (package! org-kanban)

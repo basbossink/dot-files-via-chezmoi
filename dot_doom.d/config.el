@@ -249,6 +249,8 @@
 
 (use-package! ob-http)
 
+(use-package! kbd-mode)
+
 (setq
  auto-revert-verbose nil
  browse-url-browser-function 'browse-url-firefox
