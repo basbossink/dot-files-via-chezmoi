@@ -1,7 +1,3 @@
-if $SHINIT_RUN ; then
-    exit 0
-fi
-
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
