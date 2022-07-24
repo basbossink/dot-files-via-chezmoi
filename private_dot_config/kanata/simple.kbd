@@ -40,6 +40,8 @@
   tc (macro C-b c)
   tf (macro C-b n)
   tp (macro C-b p)
+  tmc (macro C-b [)
+  tmp (macro C-b ])
   ;; layer-switch changes the base layer.
   dvk (layer-switch dvorak)
   qwr (layer-switch qwerty)
@@ -61,7 +63,7 @@
 (deflayer tmux
   _    @qwr @dvk _    _    _    _    _    _    _    _    _    _   _ _
   _    _    _    _    _    _    _   @tc  @ts  @tv  @tn   _    _   _ _
-  _    _    _    _    _    @tf  @tp @tl  @tj  @tk  @tr   _    _
+  _    _    @tmc @tmp _    @tf  @tp @tl  @tj  @tk  @tr   _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _              _              _    _    _    _    _   _
 )
