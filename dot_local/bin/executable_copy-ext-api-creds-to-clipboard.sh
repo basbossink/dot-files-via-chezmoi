@@ -1,3 +1,3 @@
 #! /usr/bin/sh
 
-cargo run -- ext-api create-account | rg '^[^0-9].+: ' | awk '{print $2}' | tr '\n' ':' | sed 's/:$//' | xsel -b
+cargo run -- ext-api create-account --user-name $(uuid | tr -d '\n') | tail -n 2 | awk '{print $2}' | tr '\n' ':' | sed 's/:$//' | xsel -b
