@@ -9,7 +9,6 @@ return require('packer').startup(function()
   use 'itchyny/lightline.vim' -- Fancier statusline
   -- Add indentation guides even on blank lines
   use 'lukas-reineke/indent-blankline.nvim'
-  -- Highlight, edit, and navigate code using a fast incremental parsing library
   use 'eddyekofo94/gruvbox-flat.nvim'
   use 'editorconfig/editorconfig-vim'
 end)
