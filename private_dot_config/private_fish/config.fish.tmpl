@@ -53,11 +53,16 @@ end
 
 alias ato add-today-to-travel-exp
 
-function update-repos
-    ssh-add -l | rg -wq 'basbossink-ds'
+function maybe-add-key -a key_name
+    ssh-add -l | rg -wq $key_name
     if test $status -ne 0 
-        ssh-add $HOME/.ssh/id_basbossink-ds
+        ssh-add $HOME/.ssh/id_$key_name
     end
+end
+
+function update-repos
+ 	maybe-add-key 'basbossink-ds'
+	maybe-add-key 'basbossink-ds-servers'   
     pushd $TD_HOME
     fd -uu --max-depth 3 --type d '\.git$' -x sh -c "cd {//}; git fetch --prune --verbose"
     popd 
