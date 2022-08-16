@@ -1,0 +1,5 @@
+PATH=/usr/local/bin:/usr/bin:/bin
+SHELL=/usr/bin/sh
+HOME=/home/bas
+
+1	5	daily.backup wks_backup_rsync.sh 2>&1 | logger -t 'ws-backup'
