@@ -47,7 +47,7 @@
   (setq org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t
         org-log-into-drawer t
-        org-todo-keywords '((sequence "DEVELOPING(d!)" "IN REVIEW(r!)" "W.F. REWORK(w!)" "REWORKING(o!)" "IN RE-REVIEW(n!)" "|" "MERGED(m!)" "CANCELED(c@)"))
+        org-todo-keywords '((sequence "DEVELOPING(d!)" "IN REVIEW(r!)" "W.F. REWORK(w!)" "REWORKING(o!)" "IN RE-REVIEW(n!)" "APPROVED(a!)" "|" "MERGED(m!)" "CANCELED(c@)"))
         org-todo-keywords-for-agenda '((sequence "TODO(t!)" "|" "DONE(d!)" "CANCELED(c@)"))
         org-link-abbrev-alist '(("ghpr" . "https://github.com/dreamsolution/tandemdrive/pull/%s")
                                 ("ghi" . "https://github.com/dreamsolution/tandemdrive/issues/%s")
@@ -262,6 +262,7 @@
  dired-auto-revert-buffer t
  explicit-shell-file-name "/usr/bin/sh"
  global-auto-revert-mode t
+ kill-ring-max 100
  sentence-end-double-space nil
  shell-file-name "/usr/bin/sh"
 )
