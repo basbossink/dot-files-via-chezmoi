@@ -131,23 +131,21 @@
 (after! magit
   (defun bb/branch-description (r)
    (let* ((branch (magit-get-current-branch))
-              (desc (magit-get "branch" branch "description")))
+              (desc (or (magit-get "branch" branch "description") "")))
               (car (split-string desc "\n"))))
   (setq
    magit-repository-directories (list (cons (expand-file-name "~/ds/code") 2))
    magit-repolist-columns
-   '(("Name" 25 magit-repolist-column-ident nil)
-    ("PR" 8 bb/branch-description nil)
+   '(("Name" 20 magit-repolist-column-ident nil)
+    ("Desc." 8 bb/branch-description nil)
     ("Branch" 35 magit-repolist-column-branch nil)
     ("Upstream branch" 35 magit-repolist-column-branch nil)
-    ("Version" 35 magit-repolist-column-version nil)
     ("B<U" 5 magit-repolist-column-unpulled-from-upstream
      ((:right-align t)
       (:help-echo "Upstream changes not in branch")))
     ("B>U" 5 magit-repolist-column-unpushed-to-upstream
      ((:right-align t)
-      (:help-echo "Local changes not in upstream")))
-    ("Path" 99 magit-repolist-column-path nil)))
+      (:help-echo "Local changes not in upstream")))))
   (magit-add-section-hook
    'magit-status-sections-hook
    'magit-insert-branch-description nil t)
