@@ -46,6 +46,7 @@
 (after! org
   (setq org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t
+        org-hide-leading-stars nil
         org-log-into-drawer t
         org-todo-keywords '((sequence "DEVELOPING(d!)" "IN REVIEW(r!)" "W.F. REWORK(w!)" "REWORKING(o!)" "IN RE-REVIEW(n!)" "APPROVED(a!)" "|" "MERGED(m!)" "CANCELED(c@)"))
         org-todo-keywords-for-agenda '((sequence "TODO(t!)" "|" "DONE(d!)" "CANCELED(c@)"))
@@ -53,6 +54,10 @@
                                 ("ghi" . "https://github.com/dreamsolution/tandemdrive/issues/%s")
                                 ("gpr" . "https://git.service.d11n.nl/dreamsolution/tandemdrive-bureau/pulls/%s")
                                 ("gi"  . "https://git.service.d11n.nl/dreamsolution/tandemdrive-bureau/issues/%s")))
+  (defun bb/org-settings ()
+    (org-indent-mode -1))
+
+  (add-hook! org-mode :append #'bb/org-settings)
 
   (after! org-capture
     (setq bb/http-test-directory (expand-file-name "tests" org-directory))
@@ -257,6 +262,7 @@
 
 (setq
  auto-revert-verbose nil
+ auth-sources '((:source "~/.authinfo.gpg"))
  browse-url-browser-function 'browse-url-firefox
  browse-url-generic-program "firefox"
  dired-auto-revert-buffer t
