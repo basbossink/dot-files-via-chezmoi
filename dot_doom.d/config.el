@@ -129,10 +129,15 @@
        :desc "Visit timelog" "v" #'my/timeclock-visit-timelog))
 
 (after! magit
+  (defun bb/branch-description (r)
+   (let* ((branch (magit-get-current-branch))
+              (desc (magit-get "branch" branch "description")))
+              (car (split-string desc "\n"))))
   (setq
    magit-repository-directories (list (cons (expand-file-name "~/ds/code") 2))
    magit-repolist-columns
-   '(("Name" 35 magit-repolist-column-ident nil)
+   '(("Name" 25 magit-repolist-column-ident nil)
+    ("PR" 8 bb/branch-description nil)
     ("Branch" 35 magit-repolist-column-branch nil)
     ("Upstream branch" 35 magit-repolist-column-branch nil)
     ("Version" 35 magit-repolist-column-version nil)
