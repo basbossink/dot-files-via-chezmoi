@@ -13,7 +13,7 @@ set -gx DS_LOCAL_DATA $HOME/ds/.local/data
 set -gx TRAVEL_EXP_DIR $DS_LOCAL_DATA/travel/
 set -gx ERL_AFLAGS "+pc unicode -kernel shell_history enabled"
 set -gx EMACS $HOME/.local/bin/emacs
-
+set -gx MANPATH (manpath -q)
 
 fish_add_path --prepend --global /usr/lib/llvm-14/bin $HOME/.config/yarn/global/node_modules/.bin/ $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $HOME/.cache/rebar3/bin
 
@@ -21,6 +21,7 @@ set -gx TIMELOG {{ .timelog }}
 
 alias .j='just --justfile ~/.user.justfile --working-directory .'
 alias apt='doas /usr/bin/apt'
+alias nala='doas /usr/bin/nala'
 alias c='cargo'
 alias cm='chezmoi'
 alias e='hx'
