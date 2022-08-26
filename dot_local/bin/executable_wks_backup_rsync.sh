@@ -1,5 +1,12 @@
 #!/usr/bin/env sh
 set -e
+
+SSH_AUTH_SOCK=$(/home/bas/.cargo/bin/fd agent /tmp)
+DISPLAY=:0
+
+export SSH_AUTH_SOCK
+export DISPLAY
+
 if ssh-add -L | grep -q 'servers'; then
 	notify-send "Backup started"
 	rsync -av \
