@@ -216,7 +216,7 @@
 (after! consult
   (map!
    :desc "Yank selection from kill-ring"
-   "C-c p" #'consult-yank-from-kill-ring))
+   "C-c y" #'consult-yank-from-kill-ring))
 
 (after!
   (:or gfm-mode markdown-mode)
