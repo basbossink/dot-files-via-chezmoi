@@ -20,7 +20,11 @@ if ssh-add -L | grep -q 'servers'; then
 		--max-size 10mb \
 		-h \
 		-F \
-		~/org backup:backup
+		~/org \
+		~/.local/bin/wks_backup_rsync.sh \
+		~/ds/.local/data \
+		~/.anacron/etc \
+		backup:backup
 	notify-send "Backup finished"
 else
 	notify-send -u critical "Ssh key is not loaded, skipping" >&2
