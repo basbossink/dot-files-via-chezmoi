@@ -194,6 +194,10 @@
         ;; messages don't really "move"
         mu4e-index-lazy-check t))
 
+(after! (:and mu4e evil-collection)
+  ;; Prevent warning on mu4e startup.
+  (setq evil-collection-mu4e-end-region-misc "\\[q\\]uit"))
+
 (after! (:and treemacs ace-window)
   (setq aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers)))
 
