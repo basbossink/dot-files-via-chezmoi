@@ -6,9 +6,9 @@ set -gx EDITOR hx
 set -gx VISUAL hx
 set -gx GOPATH $HOME/proj/go
 set -gx GOBIN $HOME/.local/bin
-set -gx GO111MODULE "on"
+set -gx GO111MODULE on
 set -gx TD_HOME $HOME/ds/code
-set -gx PGHOST "/var/run/postgresql"
+set -gx PGHOST /var/run/postgresql
 set -gx DS_LOCAL_DATA $HOME/ds/.local/data
 set -gx TRAVEL_EXP_DIR $DS_LOCAL_DATA/travel/
 set -gx ERL_AFLAGS "+pc unicode -kernel shell_history enabled"
@@ -36,8 +36,8 @@ alias vi='nvim'
 alias vim='nvim'
 
 umask 027
-zoxide init fish | source 
-starship init fish | source 
+zoxide init fish | source
+starship init fish | source
 gpgconf --launch gpg-agent
 
 if test -z (pgrep ssh-agent | string collect)
@@ -47,51 +47,51 @@ if test -z (pgrep ssh-agent | string collect)
 end
 
 function add-today-to-travel-exp
-  set -l dir $TRAVEL_EXP_DIR(date +%Y/%m)
-  mkdir -p $dir
-  date -I >> $dir/dates.txt
+    set -l dir $TRAVEL_EXP_DIR(date +%Y/%m)
+    mkdir -p $dir
+    date -I >>$dir/dates.txt
 end
 
 alias ato add-today-to-travel-exp
 
 function maybe-add-key -a key_name
     ssh-add -l | rg -wq $key_name
-    if test $status -ne 0 
+    if test $status -ne 0
         ssh-add $HOME/.ssh/id_$key_name
     end
 end
 
 function update-repos
- 	maybe-add-key 'basbossink-ds'
-	maybe-add-key 'basbossink-ds-servers'   
+    maybe-add-key basbossink-ds
+    maybe-add-key basbossink-ds-servers
     pushd $TD_HOME
-    fd -uu --max-depth 3 --type d '\.git$' -x sh -c "cd {//}; git fetch --prune --verbose"
-    popd 
+    fd -uu --max-depth 3 --type d '\.git$' -x sh -c "cd {//}; printf '\n\033[0;32m*****+{//}+*%50s\033[0m\n'| tr ' ' '*' |tr '+' ' '; git fetch --prune --verbose; printf '\n'"
+    popd
 end
 
 alias urs update-repos
 
 function show-overtime
-  set -l today_start (tail -n 20 $TIMELOG | rg (date +%Y/%m/%d) | rg '^i ' | head -1 | cut -d' ' -f2,3 | tr '/:' ' ')
-  set -l worked_today (ledger bal --period 'today' | awk '{ print $1 }')
-  ledger --daily reg | TODAY_START=$today_start WORKED_TODAY=$worked_today over-time.awk | column --table -s = 
+    set -l today_start (tail -n 20 $TIMELOG | rg (date +%Y/%m/%d) | rg '^i ' | head -1 | cut -d' ' -f2,3 | tr '/:' ' ')
+    set -l worked_today (ledger bal --period 'today' | awk '{ print $1 }')
+    ledger --daily reg | TODAY_START=$today_start WORKED_TODAY=$worked_today over-time.awk | column --table -s =
 end
 
 alias over show-overtime
 alias tls tlsum
 
 function jump-to-repo-root
-  pushd (git rev-parse --show-toplevel)
-  commandline -f repaint
+    pushd (git rev-parse --show-toplevel)
+    commandline -f repaint
 end
 
 alias jrr jump-to-repo-root
-bind \eh 'jump-to-repo-root'
+bind \eh jump-to-repo-root
 
 function run-ci
-  jump-to-repo-root
-  TD_LOG_LEVEL=warn ./runtest.sh
-  popd
+    jump-to-repo-root
+    TD_LOG_LEVEL=warn ./runtest.sh
+    popd
 end
 
 bind \ei 'run-ci'
