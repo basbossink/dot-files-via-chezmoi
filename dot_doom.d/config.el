@@ -156,7 +156,7 @@
   (defalias 'forward-evil-word 'forward-evil-symbol))
 
 ;; Mail setup
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (after! mu4e
   (set-email-account! "work"
                       '((mu4e-sent-folder       . "/work/[Gmail]/Verzonden berichten")
@@ -193,10 +193,6 @@
         ;; because gmail uses labels as folders we can use lazy check since
         ;; messages don't really "move"
         mu4e-index-lazy-check t))
-
-(after! (:and mu4e evil-collection)
-  ;; Prevent warning on mu4e startup.
-  (setq evil-collection-mu4e-end-region-misc "\\[q\\]uit"))
 
 (after! (:and treemacs ace-window)
   (setq aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers)))
