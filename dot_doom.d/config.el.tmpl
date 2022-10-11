@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Bas Bossink"
-      user-mail-address "basbossink@dreamsolution.nl")
+      user-mail-address "{{ .email }}")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -163,9 +163,9 @@
                         (mu4e-drafts-folder     . "/work/[Gmail]/Concepten")
                         (mu4e-trash-folder      . "/work/[Gmail]/Prullenbak")
                         (mu4e-refile-folder     . "/work/[Gmail]/Alle e-mail")
-                        (smtpmail-smtp-user     . "basbossink@dreamsolution.nl"))
+                        (smtpmail-smtp-user     . "{{ .email }}"))
                       t)
-  (setq +mu4e-gmail-accounts '(("basbossink@dreamsolution.nl" . "/work")))
+  (setq +mu4e-gmail-accounts '(("{{ .email }}" . "/work")))
 
   (setq sendmail-program "/usr/bin/msmtp"
         send-mail-function #'smtpmail-send-it
@@ -173,7 +173,7 @@
         message-sendmail-extra-arguments '("--read-envelope-from")
         message-send-mail-function #'message-send-mail-with-sendmail)
 
-  (setq mu4e-compose-reply-to-address "basbossink@dreamsolution.nl")
+  (setq mu4e-compose-reply-to-address "{{ .email }}")
 
   (setq mu4e-compose-signature (with-temp-buffer
                                  (insert-file-contents "~/.signature")
