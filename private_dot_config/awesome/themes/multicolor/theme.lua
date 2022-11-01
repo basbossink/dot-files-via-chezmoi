@@ -102,7 +102,7 @@ mytextclock.font = theme.font
 -- Textlock
 local clockicon = wibox.widget.imagebox(theme.widget_clock)
 local clock = awful.widget.watch(
-    "date +'%V.%u %a %F | %H:%M'", 60,
+    "date +'%V.%u %a %F | %H:%M %:z'", 60,
     function(widget, stdout)
         widget:set_markup(" " .. markup.font(theme.font, stdout))
     end
