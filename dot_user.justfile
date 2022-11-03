@@ -20,8 +20,8 @@ start-ext-api:
 	cargo run ext-api run http://127.0.0.1:8002
 
 list-prs:
-	@gh pr list --author "@me" --json "number,reviewDecision,title,reviewRequests" \
-			--jq ".[]| [.number, .reviewDecision, .title, .reviewRequests[].login]| @tsv"
+	@gh pr list --author "@me" --json "number,reviewDecision,mergeable,statusCheckRollup,title,reviewRequests" \
+			--jq ".[]| [.number, .reviewDecision, .mergeable, .statusCheckRollup[].conclusion // false, .title, .reviewRequests[].login]| @csv"
 
 list-issues:
 	@gh issue list --assignee "@me" --json "number,title" \
