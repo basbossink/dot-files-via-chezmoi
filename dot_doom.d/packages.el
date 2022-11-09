@@ -10,6 +10,8 @@
 ;(package! some-package)
 (package! bazel-mode
   :recipe (:host github :repo "bazelbuild/emacs-bazel-mode" :files ("bazel.el")))
+(package! parse-csv
+  :recipe (:host github :repo "mrc/el-csv" :files ("parse-csv.el")))
 (package! just-mode)
 (package! kbd-mode
   :recipe (:host github

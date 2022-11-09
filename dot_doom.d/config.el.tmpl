@@ -263,6 +263,8 @@
 
 (use-package! kbd-mode)
 
+(use-package! parse-csv)
+
 (setq
  auto-revert-verbose nil
  auth-sources '((:source "~/.authinfo.gpg"))
@@ -275,6 +277,9 @@
  sentence-end-double-space nil
  shell-file-name "/usr/bin/sh"
 )
+
+(defun bb/add-parse-csv-to-load-path ()
+  (add-to-list 'load-path (expand-file-name "~/.emacs.d/.local/straight/repos/el-csv/")))
 
 (defun bb/set-exec-path-from-shell-path ()
   (let* ((sh-path
@@ -289,5 +294,6 @@
     (setq exec-path new-exec-path)
     (setenv "PATH" (string-join new-exec-path ":"))))
 
-(add-hook 'after-init-hook
-           #'bb/set-exec-path-from-shell-path)
+(add-hook! 'after-init-hook
+           #'bb/set-exec-path-from-shell-path
+           #'bb/add-parse-csv-to-load-path)
