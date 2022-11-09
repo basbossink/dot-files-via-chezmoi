@@ -26,3 +26,6 @@ list-prs:
 list-issues:
 	@gh issue list --assignee "@me" --json "number,title" \
 			--jq ".[]|[.number, .title]| @tsv"
+
+top-migration:
+	cd ~/ds/code/td && fd --glob -p '**/migrations/0*.sql' -x /usr/bin/echo {/.}|sort -nr |head
