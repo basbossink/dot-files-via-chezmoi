@@ -246,3 +246,6 @@ skim_key_bindings
 
 . ~/.local/bin/erl/25.0.3/activate.fish
 
+{{- if eq .chezmoi.hostname "tpt440pdev" }}
+direnv hook fish | source
+{{- end -}}
