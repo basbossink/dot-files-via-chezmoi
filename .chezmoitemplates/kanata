@@ -1,5 +1,5 @@
 (defcfg
-  linux-dev /dev/input/by-id/usb-LiteOn_Lenovo_Traditional_USB_Keyboard-event-kbd
+  linux-dev {{ . }}
 )
 
 (defsrc
