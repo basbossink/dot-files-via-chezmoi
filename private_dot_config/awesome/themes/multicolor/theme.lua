@@ -238,7 +238,7 @@ local memory = lain.widget.mem({
     end
 })
 
--- MPD
+--[[ MPD
 local mpdicon = wibox.widget.imagebox()
 theme.mpd = lain.widget.mpd({
     settings = function()
@@ -265,6 +265,7 @@ theme.mpd = lain.widget.mpd({
         widget:set_markup(markup.fontfg(theme.font, "#e54c62", artist) .. markup.fontfg(theme.font, "#b2b2b2", title))
     end
 })
+--]]
 
 function theme.at_screen_connect(s)
     -- Quake application
@@ -304,8 +305,8 @@ function theme.at_screen_connect(s)
             --s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
-            mpdicon,
-            theme.mpd.widget,
+            --mpdicon,
+            --theme.mpd.widget,
         },
         --s.mytasklist, -- Middle widget
         nil,
