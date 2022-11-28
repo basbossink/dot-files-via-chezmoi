@@ -197,22 +197,30 @@
 (after! (:and treemacs ace-window)
   (setq aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers)))
 
-(after!
-  lsp-mode
-  (add-hook
-   'lsp-after-apply-edits-hook
-   (lambda (operation)
-     (when (eq operation 'rename)
-       (projectile-save-project-buffers))))
+(use-package! lsp-mode
+  :init
+  (after!
+    lsp-mode
+    (add-hook
+     'lsp-after-apply-edits-hook
+     (lambda (operation)
+       (when (eq operation 'rename)
+         (projectile-save-project-buffers)))))
+  :config
   (setq lsp-lens-enable nil
+        lsp-idle-delay 5
         lsp-enable-on-type-formatting nil
         lsp-headerline-breadcrumb-enable t))
 
-(after! rustic
-  (map! (:map rustic-mode-map
-         :localleader
-         :desc "Jump to begin of function" "f" #'rustic-beginning-of-defun
-         :desc "Jump to end of function" "e" #'rustic-end-of-defun)))
+(use-package! rustic
+  :init 
+  (after! rustic
+    (map! (:map rustic-mode-map
+           :localleader
+           :desc "Jump to begin of function" "f" #'rustic-beginning-of-defun
+           :desc "Jump to end of function" "e" #'rustic-end-of-defun)))
+  :config
+  (setq rustic-lsp-format t))
 
 (after! consult
   (map!
@@ -224,13 +232,6 @@
   (add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill))
 
 (use-package! org-kanban)
-
-(use-package! super-save
-  :config
-  (super-save-mode +1)
-  (setq
-   super-save-auto-save-when-idle t
-   super-save-idle-duration 20))
 
 (use-package! string-inflection
   :commands (string-inflection-all-cycle
