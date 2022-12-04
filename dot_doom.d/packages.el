@@ -17,11 +17,13 @@
   :recipe (:host github
            :repo "kmonad/kbd-mode"))
 (package! mermaid-mode)
+(package! multi-vterm)
 (package! ob-http)
 (package! org-kanban)
 (package! org-pomodoro)
 (package! string-inflection)
 (package! super-save)
+(package! vterm-toggle)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
