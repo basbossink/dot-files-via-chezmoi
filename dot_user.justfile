@@ -10,7 +10,7 @@ serve-schemaspy:
 	cd ~/tmp && microserver --port 8000 > /dev/null 2>&1
 
 watch test-name='':
-	watchexec --on-busy-update restart --debounce 3000 -c -e rs -- cargo nextest run -j 1 {{test-name}}
+	watchexec --on-busy-update restart --debounce 3000 -c -e rs -- cargo nextest run --tests -j 1 {{test-name}}
 
 update-fish-config:
 	meld private_dot_config/private_fish/config.fish.tmpl ~/.config/fish/config.fish
@@ -20,7 +20,7 @@ start-ext-api:
 	cargo run ext-api run http://127.0.0.1:8002
 
 list-prs:
-	@gh pr list --author "@me" --json "number,reviewDecision,mergeable,statusCheckRollup,title,reviewRequests" \
+	@gh pr list --assignee "@me" --json "number,reviewDecision,mergeable,statusCheckRollup,title,reviewRequests" \
 			--jq ".[]| [.number, .reviewDecision, .mergeable, .statusCheckRollup[].conclusion // false, .title, .reviewRequests[].login]| @csv"
 
 list-issues:
