@@ -10,7 +10,7 @@ rustc-wrapper = "/home/bas/.cargo/bin/sccache"
 [alias]
 b = "build"
 c = "check"
-t = "test"
+t = "test --tests"
 r = "run"
 rr = "run --release"
 xv = "xtask validate --clippy deployable"
