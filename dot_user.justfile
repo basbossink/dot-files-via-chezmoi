@@ -20,12 +20,10 @@ start-ext-api:
 	cargo run ext-api run http://127.0.0.1:8002
 
 list-prs:
-	@gh pr list --assignee "@me" --json "number,reviewDecision,mergeable,statusCheckRollup,title,reviewRequests" \
-			--jq ".[]| [.number, .reviewDecision, .mergeable, .statusCheckRollup[].conclusion // false, .title, .reviewRequests[].login]| @csv"
+	@tea pr ls -o tsv -f index,mergeable,title,assignees | awk '/"Bas Bossink"/' | tsv-select -f1,2,3
 
 list-issues:
-	@gh issue list --assignee "@me" --json "number,title" \
-			--jq ".[]|[.number, .title]| @tsv"
+	@tea issue -f index,title,assignees -o tsv | awk '/"Bas Bossink"/'  | tsv-select -f1,2
 
 top-migration:
 	cd ~/ds/code/td && fd --glob -p '**/migrations/0*.sql' -x /usr/bin/echo {/.}|sort -nr |head
