@@ -128,25 +128,54 @@
 
 (after! magit
   (defun bb/branch-description (r)
-   (let* ((branch (magit-get-current-branch))
-              (desc (or (magit-get "branch" branch "description") "")))
-              (car (split-string desc "\n"))))
+    (let* ((branch (magit-get-current-branch))
+           (desc (or (magit-get "branch" branch "description") "")))
+      (car (split-string desc "\n"))))
   (setq
    magit-repository-directories (list (cons (expand-file-name "~/ds/code") 2))
    magit-repolist-columns
    '(("Name" 20 magit-repolist-column-ident nil)
-    ("Desc." 8 bb/branch-description nil)
-    ("Branch" 35 magit-repolist-column-branch nil)
-    ("Upstream branch" 35 magit-repolist-column-branch nil)
-    ("B<U" 5 magit-repolist-column-unpulled-from-upstream
-     ((:right-align t)
-      (:help-echo "Upstream changes not in branch")))
-    ("B>U" 5 magit-repolist-column-unpushed-to-upstream
-     ((:right-align t)
-      (:help-echo "Local changes not in upstream")))))
+     ("Desc." 8 bb/branch-description nil)
+     ("Branch" 35 magit-repolist-column-branch nil)
+     ("Upstream branch" 35 magit-repolist-column-branch nil)
+     ("B<U" 5 magit-repolist-column-unpulled-from-upstream
+      ((:right-align t)
+       (:help-echo "Upstream changes not in branch")))
+     ("B>U" 5 magit-repolist-column-unpushed-to-upstream
+      ((:right-align t)
+       (:help-echo "Local changes not in upstream")))))
   (magit-add-section-hook
    'magit-status-sections-hook
    'magit-insert-branch-description nil t)
+
+  (defun bb/create-pr ()
+    (interactive)
+    (let*
+        ((lines (string-lines (buffer-string)))
+         (title (car lines))
+         (body (string-join (cddr lines) "\n"))
+         (pr-buf (current-buffer))
+         (buf (get-buffer-create "*PR create output*"))
+         (help-window-select t))
+      (with-help-window buf
+        (progn
+          (call-process "tea" nil buf nil "-c" "pr" "create" "-t" title "-d" body)
+          (kill-buffer pr-buf)))))
+
+  (define-minor-mode bb/pr-mode "PR creation mode"
+    :lighter "PR"
+    :global nil
+    :keymap '(("\C-c\C-e" . bb/create-pr)))
+
+  (defun bb/new-pr ()
+    (interactive)
+    (let ((buf (generate-new-buffer "*PR*")))
+      (switch-to-buffer buf)
+      (markdown-mode)
+      (bb/pr-mode t)))
+
+  (define-key magit-status-mode-map (kbd "C-c C-p") 'bb/new-pr)
+
   (magit-list-repositories))
 
 (after! evil
