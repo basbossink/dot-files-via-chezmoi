@@ -159,7 +159,7 @@
          (help-window-select t))
       (with-help-window buf
         (progn
-          (call-process "tea" nil buf nil "-c" "pr" "create" "-t" title "-d" body)
+          (call-process "tea" nil buf nil "pr" "create" "-a" "basb" "-t" title "-d" body)
           (kill-buffer pr-buf)))))
 
   (define-minor-mode bb/pr-mode "PR creation mode"
