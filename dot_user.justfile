@@ -20,10 +20,10 @@ start-ext-api:
 	cargo run ext-api run http://127.0.0.1:8002
 
 list-prs:
-	@tea pr ls -o tsv -f index,mergeable,title,assignees | awk '/"Bas Bossink"/' | tsv-select -f1,2,3
+	@tea pr ls -o tsv -f index,mergeable,title,assignees | tsv-filter --H --str-in-fld 4:Bas | tsv-select -f1,2,3
 
 list-issues:
-	@tea issue -f index,title,assignees -o tsv | awk '/"Bas Bossink"/'  | tsv-select -f1,2
+	@tea issue -f index,title,assignees -o tsv | tsv-filter --H --str-in-fld 3:Bas  | tsv-select -f1,2
 
 top-migration:
 	cd ~/ds/code/td && fd --glob -p '**/migrations/0*.sql' -x /usr/bin/echo {/.}|sort -nr |head
