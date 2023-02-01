@@ -10,8 +10,6 @@
 ;(package! some-package)
 (package! bazel-mode
   :recipe (:host github :repo "bazelbuild/emacs-bazel-mode" :files ("bazel.el")))
-(package! parse-csv
-  :recipe (:host github :repo "mrc/el-csv" :files ("parse-csv.el")))
 (package! just-mode)
 (package! kbd-mode
   :recipe (:host github
@@ -21,8 +19,12 @@
 (package! ob-http)
 (package! org-kanban)
 (package! org-pomodoro)
+(package! org-present)
+(package! parse-csv
+  :recipe (:host github :repo "mrc/el-csv" :files ("parse-csv.el")))
 (package! string-inflection)
 (package! super-save)
+(package! visual-fill-column)
 (package! vterm-toggle)
 
 ;; To install a package directly from a remote git repo, you must specify a

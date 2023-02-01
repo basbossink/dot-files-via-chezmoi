@@ -21,8 +21,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "JetBrainsMono NF" :size 16 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Iosevka NF" :size 16))
+(setq doom-font (font-spec :family "JetBrainsMono NF" :size 16)
+      doom-variable-pitch-font (font-spec :family "Iosevka NF" :size 16)
+      doom-big-font (font-spec :family "Iosevka NF" :size 32))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -375,3 +376,71 @@
 (add-hook! 'after-init-hook
            #'bb/set-exec-path-from-shell-path
            #'bb/add-parse-csv-to-load-path)
+
+(use-package! org-present
+  :init
+  (after! org-present
+    (require 'org-faces)
+
+    ;; Hide emphasis markers on formatted text
+    (setq org-hide-emphasis-markers t)
+
+    ;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
+    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+
+    (map! :prefix ("C-c m" . "slides navigation")
+          :desc "first" "f" #'org-present-beginning
+          :desc "end" "e" #'org-present-end
+          :desc "next" "n" #'org-present-next
+          :desc "previous" "p" #'org-present-prev)
+
+    (defun my/org-present-start ()
+      ;; Tweak font sizes
+      (setq-local face-remapping-alist '((default (:height 5.5) variable-pitch)
+                                         (header-line (:height 8.0) variable-pitch)
+                                         (org-document-title (:height 3.75) org-document-title)
+                                         (org-code (:height 1.55) org-code)
+                                         (org-verbatim (:height 1.55) org-verbatim)
+                                         (org-block (:height 1.55) org-block)
+                                         (org-block-begin-line (:height 1.7) org-block))
+                  display-line-numbers 0)
+
+      ;; Set a blank header line string to create blank space at the top
+      (setq header-line-format " "
+            display-line-numbers nil)
+
+      ;; Display inline images automatically
+      (org-display-inline-images)
+      (visual-line-mode 1)
+
+      (message "present start hook finished"))
+
+    (defun my/org-present-end ()
+      ;; Reset font customizations
+      (setq-local face-remapping-alist '((default variable-pitch default))
+                  display-line-numbers 1)
+
+      ;; Clear the header line string so that it isn't displayed
+      (setq header-line-format nil
+            display-line-numbers 'absolute)
+
+      ;; Stop displaying inline images
+      (org-remove-inline-images)
+
+      ;; Stop centering the document
+      ;;(visual-fill-column-mode 0)
+      (visual-line-mode 0))
+
+    ;; Turn on variable pitch fonts in Org Mode buffers
+    (add-hook 'org-mode-hook 'variable-pitch-mode)
+
+    ;; Register hooks with org-present
+    (add-hook 'org-present-mode-hook 'my/org-present-start)
+    (add-hook 'org-present-mode-quit-hook 'my/org-present-end)))
