@@ -24,3 +24,4 @@ xautolock -secure -notify 30 -notifier "notify-send 'About to lock the screen'" 
 espanso start --unmanaged
 flameshot
 qlipper & > /dev/null 2>&1
+udiskie & > /dev/null 2>&1
