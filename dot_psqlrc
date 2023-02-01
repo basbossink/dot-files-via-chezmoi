@@ -8,7 +8,6 @@
 \pset unicode_border_linestyle single
 \pset unicode_column_linestyle single
 \pset unicode_header_linestyle double
-set intervalstyle to 'postgres_verbose';
 
 \setenv LESS '-iMFXSx4R'
 \setenv EDITOR 'kibi'
