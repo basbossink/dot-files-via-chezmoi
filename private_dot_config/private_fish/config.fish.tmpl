@@ -15,7 +15,7 @@ set -gx ERL_AFLAGS "+pc unicode -kernel shell_history enabled"
 set -gx EMACS $HOME/.local/bin/emacs
 set -gx MANPATH (manpath -q)
 
-fish_add_path --prepend --global /usr/lib/llvm-14/bin $HOME/.config/yarn/global/node_modules/.bin/ $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $HOME/.cache/rebar3/bin $HOME/.luarocks/bin /usr/local/go/bin
+fish_add_path --prepend --global /usr/lib/llvm-14/bin $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $HOME/.cache/rebar3/bin $HOME/.luarocks/bin /usr/local/go/bin
 
 set -gx TIMELOG {{ .timelog }}
 
@@ -34,6 +34,7 @@ alias ll='exa --all --long --icons --classify --group-directories-first --sort n
 alias neovim='nvim'
 alias vi='nvim'
 alias vim='nvim'
+alias yless='jless --yaml'
 
 umask 027
 zoxide init fish | source
