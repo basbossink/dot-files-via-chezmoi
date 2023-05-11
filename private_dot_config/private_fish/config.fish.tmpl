@@ -91,11 +91,11 @@ bind \eh jump-to-repo-root
 
 function run-ci
     jump-to-repo-root
-    TD_LOG_LEVEL=warn ./runtest.sh
+    TD_LOG_LEVEL=warn c xc
     popd
 end
 
-bind \ei 'run-ci'
+bind \ei run-ci
 
 function skim_key_bindings
 
