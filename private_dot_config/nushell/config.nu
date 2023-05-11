@@ -538,3 +538,6 @@ let-env config = {
     }
   ]
 }
+source zoxide.nu
+source starship-init.nu
+
