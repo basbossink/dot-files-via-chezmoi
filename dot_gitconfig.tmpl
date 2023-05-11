@@ -53,7 +53,7 @@
 	root = rev-parse --show-toplevel
 	st = status
 	sup = submodule update
-	tg = tag --sort=-creatordate
+	tg = tag --sort=-creatordate --format='%(creatordate:short):  %(refname:short)'
 	unco = checkout
 	unstage = reset HEAD --
 [filter "lfs"]
@@ -63,3 +63,5 @@
 	clean = git-lfs clean -- %f
 [gui]
 	editor = neovide
+[fetch]
+	writeCommitGraph = true
