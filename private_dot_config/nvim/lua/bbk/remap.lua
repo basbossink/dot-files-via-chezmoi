@@ -8,3 +8,7 @@ vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
 -- quickfix mappings
 vim.api.nvim_set_keymap('n', '<leader>en', [[<cmd>cnext<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ep', [[<cmd>cprevious<CR>]], { noremap = true, silent = true })
+
+-- show whitspace mappings
+vim.api.nvim_set_keymap('n', '<leader>w', [[<cmd>set list!<CR>]], { noremap = true, silent = true })
+
