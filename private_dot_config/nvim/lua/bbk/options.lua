@@ -39,3 +39,7 @@ vim.o.guifont='JetbrainsMono NF:h12'
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+-- Set list chars
+vim.opt.listchars = { eol = '⏎', space = '␣', tab = '|~', trail = '•', nbsp = '‗' }
+
