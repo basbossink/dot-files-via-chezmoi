@@ -12,6 +12,7 @@ fi
 # node version manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm use stable 2>&1 > /dev/null
 
 # erlang
 if [ -d "$HOME/.local/bin/erl/25.0.3" ] ; then
