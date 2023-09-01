@@ -1,6 +1,7 @@
 [target.x86_64-unknown-linux-gnu]
 linker = "/usr/lib/llvm-14/bin/clang"
-rustflags = ["-C", "link-arg=-fuse-ld=/usr/local/bin/mold", "-C", "embed-bitcode=no"]
+rustflags = ["-C", "link-arg=-fuse-ld=/usr/local/bin/mold"]
+#rustflags = ["-C", "link-arg=-fuse-ld=/usr/local/bin/mold", "-C", "embed-bitcode=no"]
 
 [build]
 incremental = true  
@@ -15,4 +16,5 @@ r = "run"
 rr = "run --release"
 xv = "xtask validate"
 xc = "xtask ci"
+xdb = "xtask ci --only-setup-db -c"
 x = "xtask"
