@@ -10,6 +10,7 @@
 ;(package! some-package)
 (package! bazel-mode
   :recipe (:host github :repo "bazelbuild/emacs-bazel-mode" :files ("bazel.el")))
+(package! indent-tools)
 (package! just-mode)
 (package! kbd-mode
   :recipe (:host github
@@ -24,8 +25,10 @@
   :recipe (:host github :repo "mrc/el-csv" :files ("parse-csv.el")))
 (package! string-inflection)
 (package! super-save)
+(package! uuidgen)
 (package! visual-fill-column)
 (package! vterm-toggle)
+(package! yaml-pro)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

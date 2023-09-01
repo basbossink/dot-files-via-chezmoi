@@ -455,3 +455,29 @@
     ;; Register hooks with org-present
     (add-hook 'org-present-mode-hook 'my/org-present-start)
     (add-hook 'org-present-mode-quit-hook 'my/org-present-end)))
+
+(use-package markdown-mode
+  :hook (markdown-mode . lsp)
+  :config
+  (require 'lsp-marksman))
+
+(use-package indent-tools)
+
+(use-package uuidgen)
+
+(use-package! yaml-pro
+  :hook (yaml-mode . yaml-pro-mode))
+
+(map! :after yaml
+      :map yaml-mode-map
+      :localleader
+      ;; <localleader> x will invoke the dosomething command
+      "h" #'indent-tools-hydra/body)
+
+(setq +format-on-save-enabled-modes
+      '(not emacs-lisp-mode  ; elisp's mechanisms are good enough
+            markdown-mode
+	    sql-mode         ; sqlformat is currently broken
+	    tex-mode         ; latexindent is broken
+	    latex-mode
+            yaml-mode))      ; prettier breaks formatting of the JSON examples
