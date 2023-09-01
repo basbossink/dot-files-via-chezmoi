@@ -2,6 +2,8 @@
 \x auto
 \set ON_ERROR_STOP on
 \set ON_ERROR_ROLLBACK interactive
+\set VERBOSITY verbose
+\set SHOW_CONTEXT errors 
 
 \pset null '⧆'
 \pset linestyle 'unicode'
@@ -10,4 +12,6 @@
 \pset unicode_header_linestyle double
 
 \setenv LESS '-iMFXSx4R'
-\setenv EDITOR 'kibi'
+\setenv EDITOR 'hx'
+
+\timing on
