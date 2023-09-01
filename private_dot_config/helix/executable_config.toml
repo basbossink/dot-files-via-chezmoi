@@ -1,2 +1,15 @@
 theme = "gruvbox"
 
+[editor]
+auto-save = true
+cursorline = true
+line-number = "relative"
+gutters = ["diagnostics", "spacer", "line-numbers", "spacer"]
+
+[editor.statusline]
+right = ["version-control", "workspace-diagnostics", "diagnostics", "selections", "position-percentage", "position", "total-line-numbers", "file-modification-indicator" ,"file-encoding"]
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
