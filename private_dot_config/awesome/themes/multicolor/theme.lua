@@ -96,6 +96,7 @@ local markup = lain.util.markup
 --[[
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 --local clockicon = wibox.widget.imagebox(theme.widget_clock)
+local mytextclock = wibox.widget.textclock("%V.%u %A %F %H:%M")
 mytextclock.font = theme.font
 --]]
 -- Textlock
@@ -113,6 +114,9 @@ local clock = awful.widget.watch(
     end
 )
 --]]
+-- Keyboard layout
+local keyboard = awful.widget.keyboardlayout()
+
 -- Calendar
 --[[
 theme.cal = lain.widget.cal({
@@ -325,6 +329,7 @@ function theme.at_screen_connect(s)
             wibox.widget.systray(),
             --mailicon,
             --theme.mail.widget,
+            keyboard,
             --netdownicon,
             netdowninfo,
             -- netupicon,
