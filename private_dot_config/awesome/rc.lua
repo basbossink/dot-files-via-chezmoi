@@ -104,7 +104,7 @@ local themes = {
 local chosen_theme = themes[5]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = os.getenv("HOME") .. "/.cargo/bin/alacritty"
+local terminal     = "kitty"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
@@ -274,9 +274,9 @@ globalkeys = mytable.join(
     -- Set Yubikey keyboard to us 
     awful.key({ modkey, "Shift"}, "y",
          function ()
-             awful.spawn.with_shell("sh -c 'setxkbmap -device $(xinput | rg Yubico | cut -d= -f 2|cut -f 1) us'")
+             awful.spawn.with_shell("fish -c 'setxkbmap -query | rg -q dvorak; if test $status -eq 0; setxkbmap -layout us -option ctrl:nocaps; else; setxkbmap -layout us -variant dvorak -option ctrl:nocaps; end'")
          end,
-        {description  = "Set Yubikey keyboard layout", group = "hotkeys"}),
+        {description  = "Toggle keyboard layout between dvorak and qwerty", group = "hotkeys"}),
     awful.key({ modkey }, "e",
          function ()
              awful.spawn("splatmoji copy")
@@ -494,6 +494,17 @@ globalkeys = mytable.join(
                 awful.spawn.with_shell("rofi -show drun")
         end,
         {description = "show rofi", group = "launcher"}),
+    -- clock in
+    awful.key({ modkey }, "i", function ()
+                awful.spawn.with_shell([[ ci && notify-send "Clocked in"]])
+        end,
+        {description = "Clock in", group = "hotkeys"}),
+    -- clock out
+    awful.key({ modkey, "Shift" }, "o", function ()
+                awful.spawn.with_shell([[ co && notify-send "Clocked out"]])
+        end,
+        {description = "Clock out", group = "hotkeys"}),
+
     --]]
     -- Prompt
     --[[
