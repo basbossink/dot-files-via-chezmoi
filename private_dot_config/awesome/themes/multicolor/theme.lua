@@ -16,7 +16,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
 --theme.wallpaper                                 = theme.confdir .. "/wall.png"
-theme.font                                      = "JetBrainsMono NF 11"
+theme.font                                      = "JetBrainsMono NF 12"
 theme.menu_bg_normal                            = "#000000"
 theme.menu_bg_focus                             = "#000000"
 theme.bg_normal                                 = "#000000"
@@ -100,11 +100,11 @@ mytextclock.font = theme.font
 --]]
 -- Textlock
 -- local clockicon = wibox.widget.imagebox(theme.widget_clock)
-local clock = wibox.widget.textclock(" | wk %V.%u %a %F || %H:%M %:z")
+local clock = wibox.widget.textclock(" | wk %V.%u %a %F | %H:%M")
 clock.font = theme.font
-local clock2= wibox.widget.textclock(" || %H:%M UTC")
+local clock2= wibox.widget.textclock(" | %Z: %H:%M")
 clock2.font = theme.font
-clock2.timezone = "Z"
+clock2.timezone = "UTC"
 --[[
 local clock = awful.widget.watch(
     "date +'%V.%u %a %F | %H:%M %:z'", 60,
@@ -178,7 +178,7 @@ theme.mail = lain.widget.imap({
 local cpu = lain.widget.cpu({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | cpu: ".. cpu_now.usage .. "% "))
-        widget:set_forced_width(170)
+        widget:set_forced_width(180)
     end
 })
 
@@ -202,7 +202,7 @@ local bat = lain.widget.bat({
         end
 
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | bat: " .. perc .. " "))
-        widget:set_forced_width(170)
+        widget:set_forced_width(180)
     end
 })
 --[[ ALSA volume
@@ -233,9 +233,9 @@ local netupinfo = lain.widget.net({
         --]]
 
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | up: " .. net_now.sent .. " "))
-        widget:set_forced_width(170)
+        widget:set_forced_width(180)
         netdowninfo:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | down: " ..net_now.received .. " "))
-        netdowninfo:set_forced_width(170)
+        netdowninfo:set_forced_width(180)
     end
 })
 
@@ -244,7 +244,7 @@ local netupinfo = lain.widget.net({
 local memory = lain.widget.mem({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | mem: " .. mem_now.used .. " (MB) "))
-        widget:set_forced_width(170)
+        widget:set_forced_width(180)
     end
 })
 
@@ -305,7 +305,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(19), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(23), bg = theme.bg_normal, fg = theme.fg_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
