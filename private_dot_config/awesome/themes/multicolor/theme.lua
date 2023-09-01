@@ -96,18 +96,23 @@ local markup = lain.util.markup
 --[[
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 --local clockicon = wibox.widget.imagebox(theme.widget_clock)
-local mytextclock = wibox.widget.textclock("%V.%u %A %F %H:%M")
 mytextclock.font = theme.font
 --]]
 -- Textlock
-local clockicon = wibox.widget.imagebox(theme.widget_clock)
+-- local clockicon = wibox.widget.imagebox(theme.widget_clock)
+local clock = wibox.widget.textclock(" | wk %V.%u %a %F || %H:%M %:z")
+clock.font = theme.font
+local clock2= wibox.widget.textclock(" || %H:%M UTC")
+clock2.font = theme.font
+clock2.timezone = "Z"
+--[[
 local clock = awful.widget.watch(
     "date +'%V.%u %a %F | %H:%M %:z'", 60,
     function(widget, stdout)
         widget:set_markup(" " .. markup.font(theme.font, stdout))
     end
 )
-
+--]]
 -- Calendar
 --[[
 theme.cal = lain.widget.cal({
@@ -169,10 +174,11 @@ theme.mail = lain.widget.imap({
 --]]
 
 -- CPU
-local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
+-- local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
 local cpu = lain.widget.cpu({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#e33a6e", cpu_now.usage .. "% "))
+        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | cpu: ".. cpu_now.usage .. "% "))
+        widget:set_forced_width(170)
     end
 })
 
@@ -186,7 +192,7 @@ local temp = lain.widget.temp({
 })
 --]]
 -- Battery
-local baticon = wibox.widget.imagebox(theme.widget_batt)
+-- local baticon = wibox.widget.imagebox(theme.widget_batt)
 local bat = lain.widget.bat({
     settings = function()
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
@@ -195,11 +201,11 @@ local bat = lain.widget.bat({
             perc = perc .. " plug"
         end
 
-        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
+        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | bat: " .. perc .. " "))
+        widget:set_forced_width(170)
     end
 })
-
--- ALSA volume
+--[[ ALSA volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
 theme.volume = lain.widget.alsa({
 	timeout = 15000,
@@ -211,11 +217,11 @@ theme.volume = lain.widget.alsa({
         widget:set_markup(markup.fontfg(theme.font, "#7493d2", volume_now.level .. "% "))
     end
 })
-
+--]]
 -- Net
-local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
+-- local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
 local netdowninfo = wibox.widget.textbox()
-local netupicon = wibox.widget.imagebox(theme.widget_netup)
+-- local netupicon = wibox.widget.imagebox(theme.widget_netup)
 local netupinfo = lain.widget.net({
     settings = function()
         --[[ uncomment if using the weather widget
@@ -226,16 +232,19 @@ local netupinfo = lain.widget.net({
         end
         --]]
 
-        widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
-        netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
+        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | up: " .. net_now.sent .. " "))
+        widget:set_forced_width(170)
+        netdowninfo:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | down: " ..net_now.received .. " "))
+        netdowninfo:set_forced_width(170)
     end
 })
 
 -- MEM
-local memicon = wibox.widget.imagebox(theme.widget_mem)
+-- local memicon = wibox.widget.imagebox(theme.widget_mem)
 local memory = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#e0da37", mem_now.used .. "M "))
+        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | mem: " .. mem_now.used .. " (MB) "))
+        widget:set_forced_width(170)
     end
 })
 
@@ -316,15 +325,15 @@ function theme.at_screen_connect(s)
             wibox.widget.systray(),
             --mailicon,
             --theme.mail.widget,
-            netdownicon,
+            --netdownicon,
             netdowninfo,
-            netupicon,
+            -- netupicon,
             netupinfo.widget,
-            volicon,
-            theme.volume.widget,
-            memicon,
+            --volicon,
+            --theme.volume.widget,
+            -- memicon,
             memory.widget,
-            cpuicon,
+            -- cpuicon,
             cpu.widget,
             --fsicon,
             --theme.fs.widget,
@@ -332,10 +341,11 @@ function theme.at_screen_connect(s)
             --theme.weather.widget,
             --tempicon,
             --temp.widget,
-            baticon,
+            -- baticon,
             bat.widget,
-            clockicon,
+            --clockicon,
             clock,
+            clock2,
         },
     }
 
