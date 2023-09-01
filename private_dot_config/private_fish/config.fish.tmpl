@@ -14,8 +14,9 @@ set -gx TRAVEL_EXP_DIR $DS_LOCAL_DATA/travel/
 set -gx ERL_AFLAGS "+pc unicode -kernel shell_history enabled"
 set -gx EMACS $HOME/.local/bin/emacs
 set -gx MANPATH (manpath -q)
+set -Ux PYENV_ROOT $HOME/.pyenv
 
-fish_add_path --prepend --global /usr/lib/llvm-14/bin $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $HOME/.cache/rebar3/bin $HOME/.luarocks/bin /usr/local/go/bin
+fish_add_path --prepend --global /usr/lib/llvm-14/bin $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $HOME/.cache/rebar3/bin $HOME/.luarocks/bin /usr/local/go/bin $HOME/.roswell/bin $PYENV_ROOT/bin
 
 set -gx TIMELOG {{ .timelog }}
 
@@ -39,6 +40,9 @@ alias yless='jless --yaml'
 umask 027
 zoxide init fish | source
 starship init fish | source
+source $HOME/.asdf/asdf.fish
+pyenv init - | source
+
 gpgconf --launch gpg-agent
 
 if test -z (pgrep ssh-agent | string collect)
@@ -54,6 +58,17 @@ function add-today-to-travel-exp
 end
 
 alias ato add-today-to-travel-exp
+
+function clock-in
+    date +"i %Y/%m/%d %H:%M:%S e:ds:td:overhead" >> $TIMELOG
+end
+
+function clock-out
+    date +"o %Y/%m/%d %H:%M:%S" >> $TIMELOG
+end
+
+alias ci clock-in
+alias co clock-out
 
 function maybe-add-key -a key_name
     ssh-add -l | rg -wq $key_name
@@ -96,6 +111,13 @@ function run-ci
 end
 
 bind \ei run-ci
+
+function git-push-new-branch
+    set -l branch_name (git branch --show-current)
+    git push -u origin $branch_name
+end
+
+alias gpso git-push-new-branch
 
 function skim_key_bindings
 
