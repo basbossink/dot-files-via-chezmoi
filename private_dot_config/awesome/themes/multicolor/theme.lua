@@ -116,7 +116,10 @@ local clock = awful.widget.watch(
 --]]
 -- Keyboard layout
 local keyboard = awful.widget.keyboardlayout()
+keyboard.widget.font = theme.font
 
+local seperator = wibox.widget.textbox("|")
+seperator.font = theme.font
 -- Calendar
 --[[
 theme.cal = lain.widget.cal({
@@ -182,7 +185,7 @@ theme.mail = lain.widget.imap({
 local cpu = lain.widget.cpu({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | cpu: ".. cpu_now.usage .. "% "))
-        widget:set_forced_width(180)
+        widget:set_forced_width(130)
     end
 })
 
@@ -206,7 +209,7 @@ local bat = lain.widget.bat({
         end
 
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | bat: " .. perc .. " "))
-        widget:set_forced_width(180)
+        widget:set_forced_width(170)
     end
 })
 --[[ ALSA volume
@@ -238,7 +241,7 @@ local netupinfo = lain.widget.net({
 
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | up: " .. net_now.sent .. " "))
         widget:set_forced_width(180)
-        netdowninfo:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | down: " ..net_now.received .. " "))
+        netdowninfo:set_markup(markup.fontfg(theme.font, theme.fg_normal, "| down: " ..net_now.received .. " "))
         netdowninfo:set_forced_width(180)
     end
 })
@@ -329,6 +332,7 @@ function theme.at_screen_connect(s)
             wibox.widget.systray(),
             --mailicon,
             --theme.mail.widget,
+            seperator,
             keyboard,
             --netdownicon,
             netdowninfo,
