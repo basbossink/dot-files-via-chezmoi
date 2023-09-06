@@ -209,7 +209,7 @@ local bat = lain.widget.bat({
         end
 
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | bat: " .. perc .. " "))
-        widget:set_forced_width(170)
+        widget:set_forced_width(180)
     end
 })
 --[[ ALSA volume
@@ -251,7 +251,7 @@ local netupinfo = lain.widget.net({
 local memory = lain.widget.mem({
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, " | mem: " .. mem_now.used .. " (MB) "))
-        widget:set_forced_width(180)
+        widget:set_forced_width(190)
     end
 })
 
