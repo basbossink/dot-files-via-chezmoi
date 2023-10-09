@@ -25,3 +25,4 @@ espanso start --unmanaged
 flameshot
 qlipper & > /dev/null 2>&1
 udiskie & > /dev/null 2>&1
+redshift-gtk & > /dev/null 2>&1
