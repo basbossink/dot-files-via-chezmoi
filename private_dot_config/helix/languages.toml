@@ -1,0 +1,14 @@
+[[language]]
+name = "rust"
+[language-server.rust-analyzer.config]
+checkOnSave = { enabled = true, command = "check" }
+inlayHints.parameterHints.enable = false
+inlayHints.closingBraceHints.minLines = 10
+# workspace.symbol.search.kind = "all_symbols"
+# workspace.symbol.search.limit = 65536
+procMacro.enable = false
+diagnostics.experimental.enable = false
+diagnostics.disabled = ["unresolved-proc-macro"]
+
+
+
