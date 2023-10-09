@@ -5,6 +5,7 @@ auto-save = true
 cursorline = true
 line-number = "relative"
 gutters = ["diagnostics", "spacer", "line-numbers", "spacer"]
+shell = ["/usr/bin/fish", "-c"]
 
 [editor.statusline]
 right = ["version-control", "workspace-diagnostics", "diagnostics", "selections", "position-percentage", "position", "total-line-numbers", "file-modification-indicator" ,"file-encoding"]
@@ -13,3 +14,15 @@ right = ["version-control", "workspace-diagnostics", "diagnostics", "selections"
 render = true
 character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
+
+[keys.normal]
+C-s = [
+    "save_selection",
+    "select_all",
+    # Delete trailing whitespace from end of each line
+    ":pipe sed 's/[ \t]*$//'",
+    "collapse_selection",
+    "jump_backward",
+    "commit_undo_checkpoint",
+    ":write",
+]
