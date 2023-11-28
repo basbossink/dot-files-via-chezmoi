@@ -1,0 +1,75 @@
+wtf:
+  colors:
+    border:
+      focusable: darkslateblue
+      focused: orange
+      normal: gray
+  grid:
+    columns: [32, 32, 32, 32, 32, 32]
+    rows: [50, 50]
+  refreshInterval: 1
+  mods:
+    taskwarrior:
+      cmd: "task"
+      enabled: true
+      position:
+        top: 0
+        left: 0
+        height: 1
+        width: 3
+      refreshInterval: 300s
+      type: cmdrunner
+    resourceusage:
+      cpuCombined: false
+      enabled: true
+      position:
+        top: 0
+        left: 3
+        height: 1
+        width: 2
+      refreshInterval: 1s
+      showCPU: true
+      showMem: true
+      showSwp: true
+    repos:
+      args: ["-s", "/home/bas/ds/code/td" ]
+      cmd: "git-summary"
+      enabled: true
+      position:
+        top: 0
+        left: 5
+        height: 1
+        width: 3
+      refreshInterval: 300s
+      type: cmdrunner
+    ledger:
+      args: ["--file","/home/bas/ds/.local/data/.timelog","--period", "this week","--daily", "reg"]
+      cmd: "ledger"
+      enabled: true
+      position:
+        top: 1
+        left: 0
+        height: 2
+        width: 3
+      refreshInterval: 300s
+      type: cmdrunner
+    uptime:
+      cmd: "uptime"
+      enabled: true
+      position:
+        top: 1
+        left: 3
+        height: 1
+        width: 2
+      refreshInterval: 30s
+      type: cmdrunner
+    tlsum:
+      cmd: "tlsum"
+      enabled: true
+      position:
+        top: 1
+        left: 5
+        height: 2
+        width: 3
+      refreshInterval: 300s
+      type: cmdrunner
