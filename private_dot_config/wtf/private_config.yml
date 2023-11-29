@@ -6,10 +6,11 @@ wtf:
       normal: gray
   grid:
     columns: [32, 32, 32, 32, 32, 32]
-    rows: [50, 50]
+    rows: [20, 20, 20]
   refreshInterval: 1
   mods:
     taskwarrior:
+      title: "Todos"
       cmd: "task"
       enabled: true
       position:
@@ -20,6 +21,7 @@ wtf:
       refreshInterval: 300s
       type: cmdrunner
     resourceusage:
+      title: "Resources"
       cpuCombined: false
       enabled: true
       position:
@@ -34,6 +36,7 @@ wtf:
     repos:
       args: ["-s", "/home/bas/ds/code/td" ]
       cmd: "git-summary"
+      title: "Git Repos"
       enabled: true
       position:
         top: 0
@@ -42,18 +45,20 @@ wtf:
         width: 3
       refreshInterval: 300s
       type: cmdrunner
-    ledger:
-      args: ["--file","/home/bas/ds/.local/data/.timelog","--period", "this week","--daily", "reg"]
-      cmd: "ledger"
+    prs:
+      title: "Open PRs"
+      args: ["issue", "ls","-r","/home/bas/ds/code/td/00-tandemdrive", "-A", "basb", "-K", "pulls", "-f", "index,state,title", "-o", "simple"]
+      cmd: "tea"
       enabled: true
       position:
         top: 1
         left: 0
-        height: 2
+        height: 1
         width: 3
       refreshInterval: 300s
       type: cmdrunner
     uptime:
+      title: "Up-time"
       cmd: "uptime"
       enabled: true
       position:
@@ -63,11 +68,50 @@ wtf:
         width: 2
       refreshInterval: 30s
       type: cmdrunner
-    tlsum:
-      cmd: "tlsum"
+    issues:
+      title: "Assigned Issues"
+      cmd: "/home/bas/.local/bin/list-assigned-issues.sh"
       enabled: true
       position:
         top: 1
+        left: 5
+        height: 1
+        width: 3
+      refreshInterval: 300s
+      type: cmdrunner
+    ledger:
+      title: "Clocked work (this week)"
+      args: ["--file","/home/bas/ds/.local/data/.timelog","--period", "this week","--daily", "reg"]
+      cmd: "ledger"
+      enabled: true
+      position:
+        top: 2
+        left: 0
+        height: 2
+        width: 3
+      refreshInterval: 300s
+      type: cmdrunner
+    digitalclock:
+      withDatePrefix: False
+      dateFormat: "Monday 02 Jan 2006"
+      color: orange
+      enabled: true
+      font: bigfont
+      hourFormat: 24
+      position:
+        top: 2
+        left: 3
+        height: 2
+        width: 2
+      refreshInterval: 1s
+      title: "Clock"
+      type: "digitalclock"
+    tlsum:
+      title: "Clocked time overview"
+      cmd: "tlsum"
+      enabled: true
+      position:
+        top: 2
         left: 5
         height: 2
         width: 3
