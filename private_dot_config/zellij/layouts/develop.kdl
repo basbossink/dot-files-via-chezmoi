@@ -12,10 +12,12 @@ layout {
         pane command="lazygit" cwd="/home/bas/ds/code/td/00-tandemdrive"
     }
     tab name="work"
-    tab name="mitmproxy" {
-        pane command="mitmproxy"
-    }
+    tab name="run"
+    tab name="notes"
     tab name="dashboard" {
         pane command="wtfutil"
+    }
+    tab name="mitmproxy" {
+        pane command="mitmproxy"
     }
 }

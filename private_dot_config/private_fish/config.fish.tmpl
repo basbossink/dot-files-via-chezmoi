@@ -43,6 +43,7 @@ zoxide init fish | source
 starship init fish | source
 source $HOME/.asdf/asdf.fish
 pyenv init - | source
+jj util completion --fish | source
 
 gpgconf --launch gpg-agent
 
@@ -119,6 +120,21 @@ function git-push-new-branch
 end
 
 alias gpso git-push-new-branch
+
+function search-notes
+    pushd $HOME/notes
+    $EDITOR (sk --ansi -i -c 'rg -i --color=always --line-number "{}"' | cut -d: -f1,2)
+    popd
+end
+
+alias sn search-notes
+
+function create-note
+    $EDITOR $HOME/notes/(date +"%Y_%m_%dT%H_%M_%S.md")
+end
+
+alias note create-note
+alias cn create-note
 
 function skim_key_bindings
 
