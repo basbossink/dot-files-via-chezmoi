@@ -22,9 +22,10 @@ fish_add_path --prepend --global /usr/lib/llvm-14/bin \
     $HOME/.local/bin \
     $HOME/.cache/rebar3/bin \
     $HOME/.luarocks/bin \
-    /usr/local/go/bin \
+    $HOME/.local/bin/zig \
+    $PYENV_ROOT/bin \
     $HOME/.roswell/bin \
-    $PYENV_ROOT/bin
+    /usr/local/go/bin
 
 set -gx TIMELOG {{ .timelog }}
 
