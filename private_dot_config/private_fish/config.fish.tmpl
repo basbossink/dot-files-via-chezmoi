@@ -16,7 +16,15 @@ set -gx EMACS $HOME/.local/bin/emacs
 set -gx MANPATH (manpath -q)
 set -Ux PYENV_ROOT $HOME/.pyenv
 
-fish_add_path --prepend --global /usr/lib/llvm-14/bin $HOME/.emacs.d/bin $HOME/.cargo/bin $HOME/.local/bin $HOME/.cache/rebar3/bin $HOME/.luarocks/bin /usr/local/go/bin $HOME/.roswell/bin $PYENV_ROOT/bin
+fish_add_path --prepend --global /usr/lib/llvm-14/bin \
+    $HOME/.emacs.d/bin \
+    $HOME/.cargo/bin \
+    $HOME/.local/bin \
+    $HOME/.cache/rebar3/bin \
+    $HOME/.luarocks/bin \
+    /usr/local/go/bin \
+    $HOME/.roswell/bin \
+    $PYENV_ROOT/bin
 
 set -gx TIMELOG {{ .timelog }}
 
