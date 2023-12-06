@@ -145,6 +145,15 @@ end
 alias note create-note
 alias cn create-note
 
+function cmdsave
+  set line (echo $history[1])
+  the-way cmd $line
+end
+
+function cmdsearch
+  commandline (the-way search --languages=sh --stdout)
+end
+
 function skim_key_bindings
 
   # Store current token in $dir as root for the 'find' command
