@@ -8,16 +8,18 @@ layout {
             plugin location="zellij:status-bar"
         }
     }
-    tab name="git" {
+    tab name="1: git" {
         pane command="lazygit" cwd="/home/bas/ds/code/td/00-tandemdrive"
     }
-    tab name="work"
-    tab name="run"
-    tab name="notes"
-    tab name="dashboard" {
+    tab name="2: work"
+    tab name="3: run"
+    tab name="4: notes"
+    tab name="5: dashboard" {
         pane command="wtfutil"
     }
-    tab name="mitmproxy" {
+    tab name="6: mitmproxy" {
         pane command="mitmproxy"
     }
+    tab name="7: "
+    tab name="8: "
 }
