@@ -26,4 +26,4 @@ list-issues:
 	@tea issue -f index,title,assignees -o tsv | tsv-filter --H --str-in-fld 3:Bas  | tsv-select -f1,2
 
 top-migration:
-	cd ~/ds/code/td && fd --glob -p '**/migrations/0*.sql' -x /usr/bin/echo {/.} | sort -nr | head
+	cd ~/ds/code/td && fd --glob -p '**/migrations/V*.sql' -x /usr/bin/echo {/.} | sort -nr | head
