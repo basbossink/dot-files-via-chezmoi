@@ -21,6 +21,7 @@ if ssh-add -L | grep -q 'servers'; then
 		-h \
 		-F \
 		~/org \
+		~/notes \
 		~/.local/bin/wks_backup_rsync.sh \
 		~/ds/.local/data \
 		~/.anacron/etc \
