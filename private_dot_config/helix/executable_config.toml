@@ -16,6 +16,7 @@ character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
 
 [keys.normal]
+C-j = [ "save_selection"]
 C-s = [
     "save_selection",
     "select_all",
