@@ -39,6 +39,28 @@ matches:
       Bas Bossink
   - trigger: ":bjb"
     replace: "Bas Bossink"
+  - trigger: ":note"
+    replace: |
+      <!--
+
+      id: {{new_uuid}}
+      tags: {{form.tags}}
+      
+      -->
+      # {{form.title}}
+
+    vars: 
+      - name: "form"
+        type: form
+        params:
+          layout: "Title: [[title]] \nTags: [[tags]]"
+      - name: "new_uuid"
+        type: shell
+        params: 
+          cmd: "uuid | tr -d '\n'"
+
+  - trigger: ":bjb"
+    replace: "Bas Bossink"
 
   # Dates
   - trigger: ":emit"
