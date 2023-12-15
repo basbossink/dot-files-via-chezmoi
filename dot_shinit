@@ -30,5 +30,10 @@ fi
 UNIQUES=$(echo -n $PATH | tr ":" "\n" | sort | uniq -c | tr -s " " | cut -d " " -f3 | tr "\n" ":")
 export PATH=$UNIQUES
 export EMACS="$HOME/.local/bin/emacs"
+export EDITOR="$HOME/.cargo/bin/hx"
+export VISUAL=$EDITOR
+export DS_LOCAL_DATA="$HOME/ds/.local/data"
+export PASSWORD_STORE_DIR="${DS_LOCAL_DATA}/password-store"
+export PASSWORD_STORE_GENERATED_LENGTH=20
 
 if [ -e /home/bas/.nix-profile/etc/profile.d/nix.sh ]; then . /home/bas/.nix-profile/etc/profile.d/nix.sh; fi 
