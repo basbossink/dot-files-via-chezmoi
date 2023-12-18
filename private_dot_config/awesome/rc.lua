@@ -504,6 +504,10 @@ globalkeys = mytable.join(
                 awful.spawn.with_shell([[ co && notify-send "Clocked out"]])
         end,
         {description = "Clock out", group = "hotkeys"}),
+    awful.key({ modkey }, "a", function ()
+                awful.spawn.with_shell("passmenu")
+        end,
+        {description = "Select password from pass", group = "launcher"}),
 
     --]]
     -- Prompt
