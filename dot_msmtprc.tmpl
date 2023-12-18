@@ -6,5 +6,6 @@ tls_starttls on
 auth on
 user {{ .email }}
 from {{ .email }}
-passwordeval "gpg2 -q --for-your-eyes-only --no-tty -d ~/ds/.local/data/mail-app-password.gpg 2> /dev/null"
+
+passwordeval "pass {{ .email }} | head -n1"
 account default : work
