@@ -11,6 +11,8 @@
 	trustctime = false
 	filemode = false
 	autocrlf = false
+	untrackedcache = true
+	fsmonitor = true
 [delta]
 	line-numbers = true
 	side-by-side = true
@@ -66,3 +68,13 @@
 	editor = neovide
 [fetch]
 	writeCommitGraph = true
+[rerere]
+	enabled = true
+[branch]
+	sort = -committerdate
+[push]
+	autoSetupremote = true
+[commit]
+	verbose = true
+[help]
+	autocorrect = prompt
