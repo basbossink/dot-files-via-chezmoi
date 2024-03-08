@@ -1,0 +1,10 @@
+colorscheme gruvbox-dark
+set-option global startup_info_version 99999999
+set-option global tabstop 4
+set-option global indentwidth 4
+set-option global scrolloff 5,1
+set-option global grepcmd 'rg --column'
+set-option global completers filename word=all
+set-option -add global matching_pairs ‹ › « » “ ” ‘ ’
+set-option global autowrap_column 78
+hook global WinCreate .* %{ autowrap-enable }
