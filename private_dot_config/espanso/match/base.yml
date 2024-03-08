@@ -17,6 +17,8 @@ matches:
         params:
           cmd: "echo 'Hello from your shell'"
 
+  - trigger: "tarrif"
+    replace: "tariff"
   - trigger: ":thup"
     replace: "👍"
   - trigger: ":thax"
@@ -59,8 +61,6 @@ matches:
         params: 
           cmd: "uuid | tr -d '\n'"
 
-  - trigger: ":bjb"
-    replace: "Bas Bossink"
   - trigger: ":sig:"
     replace: |
       With kind regards/Met vriendelijke groeten,
