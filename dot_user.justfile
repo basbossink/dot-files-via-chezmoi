@@ -27,3 +27,6 @@ list-issues:
 
 top-migration:
 	cd ~/ds/code/td && fd --glob -p '**/migrations/V*.sql' -x /usr/bin/echo {/.} | sort -nr | head
+validate-api-spec spec-name='admin':
+	cargo xtask api-docs prepare --yaml
+	go run github.com/daveshanley/vacuum@latest lint apidocs/specs/{{spec-name}}/www/openapi.yaml  --errors -d -s
