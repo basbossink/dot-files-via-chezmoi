@@ -103,7 +103,7 @@ wtf:
         left: 3
         height: 2
         width: 2
-      refreshInterval: 1s
+      refreshInterval: 10s
       title: "Clock"
       type: "digitalclock"
     tlsum:
