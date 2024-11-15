@@ -8,7 +8,7 @@ set -gx GOPATH $HOME/proj/go
 set -gx GOBIN $HOME/.local/bin
 set -gx GO111MODULE on
 set -gx TD_HOME $HOME/ds/code
-set -gx PGHOST /var/run/postgresql
+set -gx PGHOST /tmp
 set -gx DS_LOCAL_DATA $HOME/ds/.local/data
 set -gx TRAVEL_EXP_DIR $DS_LOCAL_DATA/travel/
 set -gx ERL_AFLAGS "+pc unicode -kernel shell_history enabled"
@@ -24,10 +24,8 @@ fish_add_path --prepend --global /usr/lib/llvm-14/bin \
     $HOME/.local/bin \
     $HOME/.cache/rebar3/bin \
     $HOME/.luarocks/bin \
-    $HOME/.local/bin/zig \
     $PYENV_ROOT/bin \
-    $HOME/.roswell/bin \
-    /usr/local/go/bin
+    $HOME/.roswell/bin
 
 set -gx TIMELOG {{ .timelog }}
 
@@ -42,7 +40,7 @@ alias g='git'
 alias gvim='neovide'
 alias j='just'
 alias ledger='ledger -f $TIMELOG'
-alias ll='exa --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
+alias ll='eza --all --long --icons --classify --group-directories-first --sort name --time-style long-iso'
 alias neovim='nvim'
 alias urlencode='python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))"'
 alias uuid-nnl="uuid | tr --delete '\n'"
@@ -56,7 +54,7 @@ starship init fish | source
 source $HOME/.asdf/asdf.fish
 jj util completion fish | source
 
-set -gx ATUIN_NOBIND "true"
+set -gx ATUIN_NOBIND true
 atuin init fish | source
 
 # bind to ctrl-r in normal and insert mode, add any other bindings you want here too
@@ -141,7 +139,7 @@ alias gpso git-push-new-branch
 
 function search-notes
     pushd $HOME/notes
-    kak (sk --ansi -i -c 'rg -i --color=always --line-number "{}"' | awk -F: '{printf"+%s:0 %s", $2, $1}' | string split " ")
+    $EDITOR (sk --ansi -i -c 'rg -i --color=always --line-number "{}"' | cut -d: -f-2)
     popd
 end
 
@@ -155,12 +153,12 @@ alias note create-note
 alias cn create-note
 
 function cmdsave
-  set line (echo $history[1])
-  the-way cmd $line
+    set line (echo $history[1])
+    the-way cmd $line
 end
 
 function cmdsearch
-  commandline (the-way search --languages=sh --stdout)
+    commandline (the-way search --languages=sh --stdout)
 end
 
 if test -e ~/.local/bin/erl/25.0.3/activate.fish
@@ -171,49 +169,3 @@ end
 direnv hook fish | source
 {{- end }}
 
-function vterm_printf;
-    if begin; [  -n "$TMUX" ]  ; and  string match -q -r "screen|tmux" "$TERM"; end
-        # tell tmux to pass the escape sequences through
-        printf "\ePtmux;\e\e]%s\007\e\\" "$argv"
-    else if string match -q -- "screen*" "$TERM"
-        # GNU screen (screen, screen-256color, screen-256color-bce)
-        printf "\eP\e]%s\007\e\\" "$argv"
-    else
-        printf "\e]%s\e\\" "$argv"
-    end
-end
-
-if [ "$INSIDE_EMACS" = 'vterm' ]
-    function clear
-        vterm_printf "51;Evterm-clear-scrollback";
-        tput clear;
-    end
-end
-
-
-function vterm_prompt_end;
-    vterm_printf '51;A'(whoami)'@'(hostname)':'(pwd)
-end
-
-functions --copy fish_prompt vterm_old_fish_prompt
-
-function fish_prompt --description 'Write out the prompt; do not replace this. Instead, put this at end of your file.'
-    # Remove the trailing newline from the original prompt. This is done
-    # using the string builtin from fish, but to make sure any escape codes
-    # are correctly interpreted, use %b for printf.
-    printf "%b" (string join "\n" (vterm_old_fish_prompt))
-    vterm_prompt_end
-end
-
-function vterm_cmd --description 'Run an Emacs command among the ones been defined in vterm-eval-cmds.'
-    set -l vterm_elisp ()
-    for arg in $argv
-        set -a vterm_elisp (printf '"%s" ' (string replace -a -r '([\\\\"])' '\\\\\\\\$1' $arg))
-    end
-    vterm_printf '51;E'(string join '' $vterm_elisp)
-end
-
-function find_file;
-    set -q argv[1]; or set argv[1] "."
-    vterm_cmd find-file (realpath "$argv")
-end
