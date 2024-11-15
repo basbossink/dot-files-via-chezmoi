@@ -151,11 +151,6 @@ keybinds {
                 floating true
             }
         }
-        bind "Ctrl y" {
-            LaunchOrFocusPlugin "file:~/.config/zellij/plugins/room.wasm" {
-                floating true
-            }
-        }
         bind "F2" {
             Run "tlsum" {
                 cwd "/tmp"
