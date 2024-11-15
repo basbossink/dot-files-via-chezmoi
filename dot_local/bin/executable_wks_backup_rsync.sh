@@ -15,11 +15,11 @@ if ssh-add -L | grep -q 'servers'; then
 		--exclude '*.pdf' \
 		--exclude '*.html' \
 		--exclude '*.tex' \
-		--exclude '*.md' \
 		--stats \
 		--max-size 10mb \
 		-h \
 		-F \
+		~/.task \
 		~/org \
 		~/notes \
 		~/.local/bin/wks_backup_rsync.sh \
