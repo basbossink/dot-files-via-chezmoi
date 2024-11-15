@@ -20,7 +20,7 @@ xrdb -merge - << EOF
 EOF
 
 $HOME/.local/bin/dex --environment Awesome --autostart $HOME/.config/autostart/*.desktop
-xautolock -secure -notify 30 -notifier "notify-send 'About to lock the screen'" -locker "i3lock" &
+xautolock -secure -notify 30 -time 10 -notifier "notify-send 'About to lock the screen'" -locker "i3lock" &
 espanso start --unmanaged
 flameshot
 qlipper & > /dev/null 2>&1
