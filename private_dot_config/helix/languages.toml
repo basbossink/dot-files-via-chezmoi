@@ -3,7 +3,7 @@ name = "rust"
 
 [language-server.rust-analyzer.config]
 checkOnSave = { enabled = true, command = "check" }
-diagnostics.disabled = ["unresolved-proc-macro"]
+diagnostics.disabled = ["macro-def-error", "macro-error" ,"proc-macros-disabled","proc-macro-disabled", "unresolved-macro-call"]
 diagnostics.experimental.enable = false
 inlayHints.closingBraceHints.minLines = 10
 inlayHints.parameterHints.enable = false
