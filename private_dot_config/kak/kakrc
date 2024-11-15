@@ -8,3 +8,11 @@ set-option global completers filename word=all
 set-option -add global matching_pairs ‹ › « » “ ” ‘ ’
 set-option global autowrap_column 78
 hook global WinCreate .* %{ autowrap-enable }
+
+hook global RegisterModified '"' %{ nop %sh{
+  printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
+}}
+
+map global user P '!xsel --output --clipboard<ret>'
+map global user p '<a-!>xsel --output --clipboard<ret>'
+map global user R '|xsel --output --clipboard<ret>'
